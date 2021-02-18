@@ -15,8 +15,8 @@ function setup() {
 
 function touchMoved() {
 
-  let object_width = 150;
-  let object_height = 150;
+  let object_width = 250;
+  let object_height = 250;
 
   ellipse(mouseX, mouseY, object_width, object_height);
   return false;
