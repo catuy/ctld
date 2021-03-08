@@ -1,72 +1,36 @@
   
-  
   function setup() {
-    // let c1 = color('yellow');
-    // let c2 = color('magenta');
-    // let c3 = color('cyan');
-    let c4 = 40;
-
+    let c1 = color('#c3503b');
+    let c2 = color('#f3df59');
+    let c3 = color('#4278a6');
+    let c4 = color('#121213');
+    let c5 = color('#fff');
+    let strokes;
     createCanvas(displayWidth, displayHeight, SVG);
-    background(240);
-    colorMode(HSB, 1, 1, 1);
-    stroke(0.0195, 0.76, 0.82);
-    // stroke(40);
-    strokeWeight(40);
-    // noStroke();
+    strokeWeight(strokes);
+    noStroke();
     noFill();
-  
     translate(width/2, height/2);
 
 
-    // ellipse(random(width), random(height), random(50, width-50), random(50, height - 150));
-
-
-    beginShape();
-    for(let i = 0; i < 14; i++) {
+    for(let r = 0; r < 14; r++) {
+      let colors = [c1, c2, c3, c4, c5];
+      let color = random(colors);
+      let strokes = random(3, 20);
+      strokeWeight(strokes);
+      // stroke(color);
+      fill(color);
+      
+      beginShape();
+    for(let i = 0; i < 3; i++) {
       const x = random(50, width-50);
       const y = random(50, height - 150);
-      curveVertex(x, y);
+      // curveVertex(x, y);
+      vertex(x, y);
     }
-    endShape();
-    stroke(0.15, 0.80, 0.96);
-
-    beginShape();
-    for(let i = 0; i < 14; i++) {
-      const x = random(50, width-50);
-      const y = random(50, height - 150);
-      curveVertex(x, y);
-    }
-    endShape();
-    stroke(0.569, 0.71, 0.67);
-
-
-    beginShape();
-    for(let i = 0; i < 14; i++) {
-      const x = random(50, width-50);
-      const y = random(50, height - 150);
-      curveVertex(x, y);
-    }
-    endShape();
-
-    stroke(0, 0, 0);
-    // noFill();
-    // stroke(c4);
-    // strokeWeight(40);
-    beginShape();
-    for(let i = 0; i < 14; i++) {
-      const x = random(50, width-50);
-      const y = random(50, height - 150);
-      curveVertex(x, y);
-
-
-      // curveVertex(300, y);
-      // curveVertex(x, 200);
-
-    }
-    endShape();
-
-    
-    // noLoop();
+    endShape(CLOSE);
+  }
+    noLoop();
   }
   save_canvas = function() {
     save();

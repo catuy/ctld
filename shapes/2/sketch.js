@@ -1,4 +1,8 @@
 let vertices = []; 
+let img;
+function preload() {
+  img = loadImage('prueba.png');
+}
   
 function setup() { 
   createCanvas(displayWidth, displayHeight, SVG);
@@ -18,7 +22,7 @@ function mouseClicked() {
   // Draw shape using the current vertices array 
   beginShape(); 
   for (let i = 0; i < vertices.length; i++) 
-    vertex(vertices[i].x, vertices[i].y); 
+  curveVertex(vertices[i].x, vertices[i].y); 
     endShape(CLOSE); 
   
   fill("red"); 

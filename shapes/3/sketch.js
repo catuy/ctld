@@ -6,11 +6,11 @@
     let c4 = 40;
 
     createCanvas(displayWidth, displayHeight, SVG);
-    background(240);
+    background(255);
     // fill(c1);
     colorMode(HSB, 1, 1, 1);
     stroke(0.15, 0.15, 0.15);
-    strokeWeight(40);
+    strokeWeight(30);
 
     // stroke(40);
   // strokeWeight(40);
@@ -23,7 +23,7 @@
 
 
     beginShape();
-    for(let i = 0; i < 7; i++) {
+    for(let i = 0; i < 8; i++) {
       const x = random(50, width-50);
       const y = random(50, height - 150);
       curveVertex(x, y);
@@ -34,7 +34,7 @@
 
 
     beginShape();
-    for(let i = 0; i < 7; i++) {
+    for(let i = 0; i < 8; i++) {
       const x = random(50, width-50);
       const y = random(50, height - 150);
       curveVertex(x, y);
@@ -46,7 +46,7 @@
 
 
     beginShape();
-    for(let i = 0; i < 7; i++) {
+    for(let i = 0; i < 8; i++) {
       const x = random(50, width-50);
       const y = random(50, height - 150);
       curveVertex(x, y);
@@ -57,7 +57,7 @@
     noFill();
     
     beginShape();
-    for(let i = 0; i < 7; i++) {
+    for(let i = 0; i < 8; i++) {
       const x = random(50, width-50);
       const y = random(50, height - 150);
       curveVertex(x, y);
