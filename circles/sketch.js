@@ -5,11 +5,12 @@ var cnv,cnvat;
 var usectrlpos = true;
 
 function setup() {
+  // createCanvas(displayWidth, displayHeight, SVG);
   createCanvas(displayWidth, displayHeight, SVG);
-  let fill_color = color('red');
-  let stroke_color = color('#000');
-  let background_color = color('#000');
-  let stroke_wight = 2;
+  let fill_color = color('#2b2378');
+  let stroke_color = color('#d90073');
+  let background_color = color('#fff');
+  let stroke_wight = 1.4;
 
 // slider test ( change from inside canvas to its own position below canvas
 if ( usectrlpos ) {

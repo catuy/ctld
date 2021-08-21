@@ -1,11 +1,11 @@
 let vertices = []; 
 let img;
-function preload() {
-  img = loadImage('prueba.png');
-}
+// function preload() {
+//   img = loadImage('prueba.png');
+// }
   
 function setup() { 
-  createCanvas(displayWidth, displayHeight, SVG);
+  createCanvas(displayWidth, displayHeight);
   background(240);
   
 } 
@@ -28,7 +28,7 @@ function mouseClicked() {
   fill("red"); 
   // Draw a circle at all the vertices 
   for (let i = 0; i < vertices.length; i++) 
-    circle(vertices[i].x, vertices[i].y, 15); 
+    circle(vertices[i].x, vertices[i].y, 150); 
 } 
 
 save_canvas = function() {
