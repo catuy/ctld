@@ -9,7 +9,7 @@ function setup() {
   createCanvas(displayWidth, displayHeight, SVG);
   let fill_color = color('#2b2378');
   let stroke_color = color('#d90073');
-  let background_color = color('#fff');
+  let background_color = color('#e2e2e2e2');
   let stroke_wight = 1.4;
 
 // slider test ( change from inside canvas to its own position below canvas
