@@ -11,7 +11,7 @@ function setup() {
 
 function draw() {
   stroke(random(255), random(255), random(255));
-  strokeWeight(25);
+  strokeWeight(55);
   line(pmouseX, pmouseY, mouseX, mouseY);
    // cambia la frecuencia del oscilador según mouseX
    let freq = map(mouseX, 0, width, 40, 880);
