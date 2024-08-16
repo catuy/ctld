@@ -31,6 +31,9 @@ function setup() {
   modulator.freq(5); // Low-frequency modulation
   modulator.amp(50);
   modulator.start();
+
+  // Solicitar pantalla completa al iniciar
+  requestFullscreen();
 }
 
 function draw() {
@@ -80,6 +83,8 @@ function keyPressed() {
     saveHighResImage();
   } else if (key === 'p') {
     paused = !paused;
+  } else if (key === 'f') {
+    requestFullscreen();
   }
 }
 
@@ -90,6 +95,7 @@ function touchStarted() {
   } else {
     paused = !paused;
   }
+  requestFullscreen();
   return false;
 }
 
@@ -123,4 +129,18 @@ function startAudio() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight); // Reajusta el canvas al tamaño completo
   background(255); // Fondo blanco
+}
+
+// Función para solicitar pantalla completa
+function requestFullscreen() {
+  let elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { // Firefox
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { // IE/Edge
+    elem.msRequestFullscreen();
+  }
 }
