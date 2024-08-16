@@ -33,7 +33,7 @@ function setup() {
   modulator.start();
 
   // Solicitar pantalla completa al iniciar
-  requestFullscreen();
+  // requestFullscreen();
 }
 
 function draw() {
@@ -84,7 +84,7 @@ function keyPressed() {
   } else if (key === 'p') {
     paused = !paused;
   } else if (key === 'f') {
-    requestFullscreen();
+    // requestFullscreen();
   }
 }
 
