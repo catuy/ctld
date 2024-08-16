@@ -95,7 +95,7 @@ function touchStarted() {
   } else {
     paused = !paused;
   }
-  requestFullscreen();
+  // requestFullscreen();
   return false;
 }
 
