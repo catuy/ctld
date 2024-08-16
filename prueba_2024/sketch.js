@@ -84,18 +84,24 @@ function keyPressed() {
   } else if (key === 'p') {
     paused = !paused;
   } else if (key === 'f') {
-    // requestFullscreen();
+    requestFullscreen();
   }
 }
 
 function touchStarted() {
   if (!audioStarted) {
-    startAudio();
-    audioStarted = true;
+    userStartAudio().then(() => {
+      console.log("Audio context started");
+      startAudio();
+      audioStarted = true;
+    }).catch((error) => {
+      console.log("Error starting audio context:", error);
+    });
   } else {
     paused = !paused;
   }
-  // requestFullscreen();
+
+  requestFullscreen(); // Intentar poner en fullscreen al tocar la pantalla
   return false;
 }
 
