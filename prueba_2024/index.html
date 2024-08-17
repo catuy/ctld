@@ -47,13 +47,17 @@ function showInstallPromotion() {
   document.body.appendChild(installButton);
 
   installButton.addEventListener('click', async () => {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`PWA instalación ${outcome}`);
-    deferredPrompt = null;
-    installButton.style.display = 'none'; // Ocultar el botón después de la instalación
+    if (deferredPrompt) {
+      deferredPrompt.prompt();  // Muestra el prompt de instalación
+      const { outcome } = await deferredPrompt.userChoice;  // Espera la respuesta del usuario
+      console.log(`PWA instalación ${outcome}`);
+      
+      deferredPrompt = null;  // Reinicia deferredPrompt después de la elección
+      installButton.style.display = 'none';  // Oculta el botón después de la interacción
+    }
   });
 }
+
 
 
     </script>
