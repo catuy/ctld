@@ -10,7 +10,30 @@
 
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
-    
+    <script>
+      
+      let deferredPrompt;
+      
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevenir el comportamiento predeterminado
+        e.preventDefault();
+        deferredPrompt = e;
+      
+        // Mostrar el prompt de instalación tan pronto como el evento se dispare
+        deferredPrompt.prompt();
+      
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('PWA instalada automáticamente');
+          } else {
+            console.log('PWA no instalada');
+          }
+          deferredPrompt = null;
+        });
+      });
+      
+      
+          </script>
   </head>
 
   <body>
@@ -26,40 +49,6 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-
-
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  console.log('beforeinstallprompt disparado');
-  deferredPrompt = e;
-  showInstallPromotion();
-});
-
-function showInstallPromotion() {
-  let installButton = document.createElement('button');
-  installButton.innerText = "Instalar App";
-  installButton.style.position = 'fixed'; // Fijar el botón
-  installButton.style.z-index = '999999'; // Fijar el botón
-  installButton.style.bottom = '20px';
-  installButton.style.left = '20px';
-  installButton.style.zIndex = '1000'; // Asegurarse de que esté por encima de otros elementos
-  document.body.appendChild(installButton);
-
-  installButton.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();  // Muestra el prompt de instalación
-      const { outcome } = await deferredPrompt.userChoice;  // Espera la respuesta del usuario
-      console.log(`PWA instalación ${outcome}`);
-      
-      deferredPrompt = null;  // Reinicia deferredPrompt después de la elección
-      installButton.style.display = 'none';  // Oculta el botón después de la interacción
-    }
-  });
-}
-
-
 
     </script>
   </body>
