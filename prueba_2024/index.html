@@ -28,18 +28,22 @@ if ('serviceWorker' in navigator) {
 }
 
 
- let deferredPrompt;
+let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   console.log('beforeinstallprompt disparado');
   deferredPrompt = e;
-  showInstallPromotion(); // Función que muestra el botón de instalación
+  showInstallPromotion();
 });
 
 function showInstallPromotion() {
   let installButton = document.createElement('button');
   installButton.innerText = "Instalar App";
+  installButton.style.position = 'fixed'; // Fijar el botón
+  installButton.style.bottom = '20px';
+  installButton.style.left = '20px';
+  installButton.style.zIndex = '1000'; // Asegurarse de que esté por encima de otros elementos
   document.body.appendChild(installButton);
 
   installButton.addEventListener('click', async () => {
@@ -47,8 +51,10 @@ function showInstallPromotion() {
     const { outcome } = await deferredPrompt.userChoice;
     console.log(`PWA instalación ${outcome}`);
     deferredPrompt = null;
+    installButton.style.display = 'none'; // Ocultar el botón después de la instalación
   });
 }
+
 
     </script>
   </body>
