@@ -41,6 +41,7 @@ function showInstallPromotion() {
   let installButton = document.createElement('button');
   installButton.innerText = "Instalar App";
   installButton.style.position = 'fixed'; // Fijar el botón
+  installButton.style.z-index = '999999'; // Fijar el botón
   installButton.style.bottom = '20px';
   installButton.style.left = '20px';
   installButton.style.zIndex = '1000'; // Asegurarse de que esté por encima de otros elementos
