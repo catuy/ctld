@@ -84,7 +84,7 @@ function keyPressed() {
   } else if (key === 'p') {
     paused = !paused;
   } else if (key === 'f') {
-    requestFullscreen();
+    // requestFullscreen();
   }
 }
 
@@ -101,7 +101,7 @@ function touchStarted() {
     paused = !paused;
   }
 
-  requestFullscreen(); // Intentar poner en fullscreen al tocar la pantalla
+  // requestFullscreen(); // Intentar poner en fullscreen al tocar la pantalla
   return false;
 }
 
