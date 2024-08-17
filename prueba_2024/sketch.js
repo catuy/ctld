@@ -32,7 +32,7 @@ function setup() {
   modulator.amp(50);
   modulator.start();
 
-  // Puedes comentar la solicitud de pantalla completa si no es esencial para la prueba
+  // Solicitar pantalla completa al iniciar
   // requestFullscreen();
 }
 
@@ -83,16 +83,25 @@ function keyPressed() {
     saveHighResImage();
   } else if (key === 'p') {
     paused = !paused;
+  } else if (key === 'f') {
+    requestFullscreen();
   }
 }
 
 function touchStarted() {
   if (!audioStarted) {
-    startAudio();
-    audioStarted = true;
+    userStartAudio().then(() => {
+      console.log("Audio context started");
+      startAudio();
+      audioStarted = true;
+    }).catch((error) => {
+      console.log("Error starting audio context:", error);
+    });
   } else {
     paused = !paused;
   }
+
+  requestFullscreen(); // Intentar poner en fullscreen al tocar la pantalla
   return false;
 }
 
@@ -123,10 +132,10 @@ function startAudio() {
   }
 }
 
-// function windowResized() {
-//   resizeCanvas(windowWidth, windowHeight); // Reajusta el canvas al tamaño completo
-//   background(200); // Fondo blanco
-// }
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight); // Reajusta el canvas al tamaño completo
+  background(255); // Fondo blanco
+}
 
 // Función para solicitar pantalla completa
 function requestFullscreen() {
