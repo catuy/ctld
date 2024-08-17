@@ -32,7 +32,7 @@ function setup() {
   modulator.amp(50);
   modulator.start();
 
-  // Solicitar pantalla completa al iniciar
+  // Puedes comentar la solicitud de pantalla completa si no es esencial para la prueba
   // requestFullscreen();
 }
 
@@ -83,25 +83,16 @@ function keyPressed() {
     saveHighResImage();
   } else if (key === 'p') {
     paused = !paused;
-  } else if (key === 'f') {
-    // requestFullscreen();
   }
 }
 
 function touchStarted() {
   if (!audioStarted) {
-    userStartAudio().then(() => {
-      console.log("Audio context started");
-      startAudio();
-      audioStarted = true;
-    }).catch((error) => {
-      console.log("Error starting audio context:", error);
-    });
+    startAudio();
+    audioStarted = true;
   } else {
     paused = !paused;
   }
-
-  // requestFullscreen(); // Intentar poner en fullscreen al tocar la pantalla
   return false;
 }
 
