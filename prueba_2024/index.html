@@ -27,27 +27,25 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-     let deferredPrompt;
+
+ let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
+  console.log('beforeinstallprompt disparado');
   deferredPrompt = e;
-  showInstallPromotion(); // Función que muestra un botón o notificación para instalar la PWA
+  showInstallPromotion(); // Función que muestra el botón de instalación
 });
 
 function showInstallPromotion() {
   let installButton = document.createElement('button');
   installButton.innerText = "Instalar App";
   document.body.appendChild(installButton);
-  
+
   installButton.addEventListener('click', async () => {
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      console.log('PWA instalada');
-    } else {
-      console.log('PWA no instalada');
-    }
+    console.log(`PWA instalación ${outcome}`);
     deferredPrompt = null;
   });
 }
