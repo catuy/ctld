@@ -1,7 +1,7 @@
 {
     "name": "My p5.js App",
     "short_name": "p5App",
-    "start_url": "/",
+    "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
