@@ -12,11 +12,11 @@ let modulator; // Modulator for FM synthesis
 function setup() {
   createCanvas(windowWidth, windowHeight); // Canvas al 100% de la pantalla
   noStroke();
-  background(255); // Fondo blanco
+  background(200); // Fondo blanco
 
   x = width / 2;
   y = height / 2;
-  elipssewidth = 80;
+  elipssewidth = 20;
 
   for (let i = 0; i < numSines; i++) {
     let sineVolume = (1.0 / numSines) / (i + 1);
@@ -134,7 +134,7 @@ function startAudio() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight); // Reajusta el canvas al tamaño completo
-  background(255); // Fondo blanco
+  background(200); // Fondo blanco
 }
 
 // Función para solicitar pantalla completa
