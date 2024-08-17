@@ -123,10 +123,10 @@ function startAudio() {
   }
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight); // Reajusta el canvas al tamaño completo
-  background(200); // Fondo blanco
-}
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight); // Reajusta el canvas al tamaño completo
+//   background(200); // Fondo blanco
+// }
 
 // Función para solicitar pantalla completa
 function requestFullscreen() {
