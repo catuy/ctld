@@ -13,31 +13,58 @@
     <script>
       
       let deferredPrompt;
-      
-      window.addEventListener('beforeinstallprompt', (e) => {
-        // Prevenir el comportamiento predeterminado
-        e.preventDefault();
-        deferredPrompt = e;
-      
-        // Mostrar el prompt de instalación tan pronto como el evento se dispare
-        deferredPrompt.prompt();
-      
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('PWA instalada automáticamente');
-          } else {
-            console.log('PWA no instalada');
-          }
-          deferredPrompt = null;
-        });
-      });
-      
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Intentar la instalación automática
+  tryAutoInstall();
+
+  // Si la instalación automática no funciona, mostrar el botón
+  if (!deferredPrompt) {
+    showInstallButton();
+  }
+});
+
+function tryAutoInstall() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('PWA instalada automáticamente');
+        deferredPrompt = null;
+      } else {
+        console.log('PWA no instalada automáticamente, mostrando botón.');
+        showInstallButton();
+      }
+    });
+  }
+}
+
+function showInstallButton() {
+  let installButton = document.createElement('button');
+  installButton.innerText = "Instalar App";
+  document.body.appendChild(installButton);
+
+  installButton.addEventListener('click', async () => {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      console.log('PWA instalada manualmente');
+    } else {
+      console.log('PWA no instalada');
+    }
+    deferredPrompt = null;
+    installButton.remove();
+  });
+}
       
           </script>
   </head>
 
   <body>
-    <!-- <script src="sketch.js"></script> -->
+    <script src="sketch.js"></script>
     <script>
 
 if ('serviceWorker' in navigator) {
