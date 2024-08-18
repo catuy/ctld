@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
     <script>
       let deferredPrompt;
       let installOffered = false;
@@ -28,7 +27,7 @@
             } else {
               console.log('PWA no instalada');
             }
-            installOffered = true; // Se marca como ofrecida
+            installOffered = true; // Marcar como ofrecida
             deferredPrompt = null;
           });
         }
@@ -44,8 +43,8 @@
         });
       }
     </script>
-  </head>
-  <body>
+</head>
+<body>
     <script src="sketch.js"></script>
-  </body>
+</body>
 </html>

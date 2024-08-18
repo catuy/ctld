@@ -48,7 +48,6 @@ function draw() {
     if (audioStarted) {
       let yoffset = map(y, 0, height, 0, 1);
       let frequency = pow(1000, yoffset) + 150;
-      let detune = map(x, 0, width, -0.5, 0.5);
 
       modulator.freq(map(x, 0, width, 1, 10));
 
@@ -96,7 +95,14 @@ function saveHighResImage() {
   highResCanvas.translate(highResCanvas.width / width, highResCanvas.height / height);
   highResCanvas.image(get(), 0, 0, highResCanvas.width, highResCanvas.height);
 
-  highResCanvas.save(`myfile-${hour()}${minute()}${second()}_highres.jpg`);
+  // Guardar en alta resolución con compatibilidad para Android
+  let imageFileName = `myfile-${hour()}${minute()}${second()}_highres.jpg`;
+  highResCanvas.canvas.toBlob((blob) => {
+    let a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = imageFileName;
+    a.click();
+  });
 }
 
 function startAudio() {
