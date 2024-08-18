@@ -44,13 +44,13 @@ function touchStarted() {
 
 function keyPressed() {
   if (key === 's') {
-    saveHighResImage();
+    saveCanvas(`myfile-${hour()}${minute()}${second()}`, 'jpg');
   } else if (key === 'p') {
     paused = !paused;
   }
 }
 
-function saveHighResImage() {
-  let scaleFactor = 5;
-  let highResCanvas = createGraphics(width * scaleFactor, height * scaleFactor);
-  highResCanvas.noStroke();
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  background(255);
+}
