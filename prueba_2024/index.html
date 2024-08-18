@@ -1,70 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="manifest" href="manifest.json">
-  <title>p5.js App</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <title>p5.js App</title>
 
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-  <!-- <script src="libraries/p5.min.js"></script> -->
-  <!-- <script src="libraries/p5.sound.min.js"></script> -->
-</head>
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+  </head>
 
-<body>
-  <script>
-    let deferredPrompt;
+  <body>
+    <!-- <script src="sketch.js"></script> -->
+    <script>
+      let deferredPrompt;
+      let interactionCount = 0; // Contador de interacciones
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
 
-      // Intentar la instalación automática después de una pequeña interacción
-      setTimeout(async () => {
-        try {
-          await deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          console.log(`PWA instalación ${outcome}`);
-          deferredPrompt = null;
-        } catch (error) {
-          console.log('Error durante la instalación automática:', error);
-          showInstallButton(); // Si falla la instalación automática, mostrar el botón
+      // Detectar interacciones del usuario
+      function userInteracted() {
+        interactionCount++;
+        if (interactionCount > 5 && deferredPrompt) { // Se puede ajustar el número de interacciones
+          triggerPWAInstall();
         }
-      }, 3000); // Tiempo de espera antes de intentar la instalación automática
-    });
+      }
 
-    function showInstallButton() {
-      let installButton = document.createElement('button');
-      installButton.innerText = "Instalar App";
-      document.body.appendChild(installButton);
-
-      installButton.addEventListener('click', async () => {
+      function triggerPWAInstall() {
         deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          console.log('PWA instalada manualmente');
-        } else {
-          console.log('PWA no instalada');
-        }
-        deferredPrompt = null;
-        installButton.remove();
-      });
-    }
-  </script>
-
-  <!-- <script src="sketch.js"></script> -->
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js').then((registration) => {
-          console.log('Service Worker registrado con éxito:', registration);
-        }).catch((error) => {
-          console.log('Error al registrar el Service Worker:', error);
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('PWA instalada');
+          } else {
+            console.log('PWA no instalada');
+          }
+          deferredPrompt = null;
         });
-      });
-    }
-  </script>
-</body>
+      }
+
+      // Escuchar varios eventos de interacción
+      window.addEventListener('click', userInteracted);
+      window.addEventListener('mousemove', userInteracted);
+      window.addEventListener('touchstart', userInteracted);
+
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('service-worker.js').then((registration) => {
+            console.log('Service Worker registrado con éxito:', registration);
+          }).catch((error) => {
+            console.log('Error al registrar el Service Worker:', error);
+          });
+        });
+      }
+    </script>
+  </body>
 </html>
