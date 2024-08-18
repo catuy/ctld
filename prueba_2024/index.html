@@ -1,78 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json">
-  <title>p5.js App</title>
-
-  <link rel="stylesheet" type="text/css" href="style.css">
-  
-  <script src="libraries/p5.min.js"></script>
-  <!-- <script src="libraries/p5.sound.min.js"></script> -->
+  <title>PWA Test</title>
 </head>
-
 <body>
-
-  <!-- <script src="sketch.js" defer></script> -->
-
   <script>
     let deferredPrompt;
 
+    // Evento que se dispara cuando la PWA es instalable
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
-      console.log('beforeinstallprompt disparado');
       deferredPrompt = e;
-
-      // Intentar la instalación automática
-      tryAutoInstall();
+      console.log('beforeinstallprompt disparado');
+      showInstallButton(); // Muestra el botón de instalación
     });
 
-    function tryAutoInstall() {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('PWA instalada automáticamente');
-            deferredPrompt = null;
-          } else {
-            console.log('PWA no instalada automáticamente, mostrando botón.');
-            showInstallButton();
-          }
-        });
-      }
-    }
-
+    // Función para mostrar el botón de instalación
     function showInstallButton() {
       let installButton = document.createElement('button');
       installButton.innerText = "Instalar App";
+      installButton.style.position = 'fixed';
+      installButton.style.bottom = '20px';
+      installButton.style.left = '20px';
+      installButton.style.padding = '10px 20px';
+      installButton.style.fontSize = '16px';
       document.body.appendChild(installButton);
 
+      // Evento para manejar la instalación
       installButton.addEventListener('click', async () => {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          console.log('PWA instalada manualmente');
-        } else {
-          console.log('PWA no instalada');
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log(`PWA instalación ${outcome}`);
+          deferredPrompt = null;
+          installButton.remove();
         }
-        deferredPrompt = null;
-        installButton.remove();
       });
     }
-  </script>
 
-  <script>
+    // Registro del Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js').then((registration) => {
-          console.log('Service Worker registrado con éxito:', registration);
-        }).catch((error) => {
-          console.log('Error al registrar el Service Worker:', error);
-        });
-      });
-    }
-  </script>
-
-</body>
-</html>
+        navigator.serviceWorker.register('service-worker.js')
+          .then(registratio
