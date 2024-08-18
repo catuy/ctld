@@ -1,22 +1,22 @@
-let sineWaves = []; // Array de osciladores sinusoidales
-let sineFreq = []; // Array de frecuencias
-let numSines = 8; // Número de osciladores
+let sineWaves = [];
+let sineFreq = [];
+let numSines = 8;
 
 let x, y;
 let elipssewidth;
 let audioStarted = false;
 let paused = false;
 
-let modulator; // Modulator for FM synthesis
+let modulator;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight); // Canvas al 100% de la pantalla
+  createCanvas(windowWidth, windowHeight);
   noStroke();
-  background(200); // Fondo blanco
+  background(255);
 
   x = width / 2;
   y = height / 2;
-  elipssewidth = 20;
+  elipssewidth = 80;
 
   for (let i = 0; i < numSines; i++) {
     let sineVolume = (1.0 / numSines) / (i + 1);
@@ -26,14 +26,10 @@ function setup() {
     sineFreq.push(0);
   }
 
-  // Setup modulator for FM synthesis
   modulator = new p5.Oscillator('sine');
-  modulator.freq(5); // Low-frequency modulation
+  modulator.freq(5);
   modulator.amp(50);
   modulator.start();
-
-  // Solicitar pantalla completa al iniciar
-  // requestFullscreen();
 }
 
 function draw() {
@@ -46,36 +42,41 @@ function draw() {
       y = mouseY;
     }
 
-    // Limita el movimiento al área del canvas
     x = constrain(x, elipssewidth / 2, width - elipssewidth / 2);
     y = constrain(y, elipssewidth / 2, height - elipssewidth / 2);
 
     if (audioStarted) {
-      // Modula la frecuencia en función de la posición del mouse
       let yoffset = map(y, 0, height, 0, 1);
       let frequency = pow(1000, yoffset) + 150;
       let detune = map(x, 0, width, -0.5, 0.5);
 
-      // Cambia la frecuencia del modulador para la modulación de frecuencia
-      modulator.freq(map(x, 0, width, 1, 10)); // Frecuencia del modulador basada en la posición del mouse
+      modulator.freq(map(x, 0, width, 1, 10));
 
       for (let i = 0; i < numSines; i++) {
         sineFreq[i] = frequency * (i + 1) + modulator.amp() * sin(TWO_PI * modulator.freq() * frameCount / 60);
         sineWaves[i].freq(sineFreq[i]);
       }
 
-      // Dibuja el patrón visual
       let p = get(x - 50, y - 50, 200, 200);
       p.filter(INVERT);
       image(p, x, y, elipssewidth, elipssewidth);
     } else {
-      // Dibuja un patrón básico si el audio no está iniciado
       fill(0);
-      // ellipse(x, y, elipssewidth);
     }
 
     imageMode(CENTER);
   }
+}
+
+function mousePressed() {
+  startAudio();
+  attemptInstall();
+}
+
+function touchStarted() {
+  startAudio();
+  attemptInstall();
+  return false;
 }
 
 function keyPressed() {
@@ -83,69 +84,31 @@ function keyPressed() {
     saveHighResImage();
   } else if (key === 'p') {
     paused = !paused;
-  } else if (key === 'f') {
-    // requestFullscreen();
   }
-}
-
-function touchStarted() {
-  if (!audioStarted) {
-    userStartAudio().then(() => {
-      console.log("Audio context started");
-      startAudio();
-      audioStarted = true;
-    }).catch((error) => {
-      console.log("Error starting audio context:", error);
-    });
-  } else {
-    paused = !paused;
-  }
-
-  // requestFullscreen(); // Intentar poner en fullscreen al tocar la pantalla
-  return false;
-}
-
-function touchEnded() {
-  if (touches.length === 2) {
-    saveHighResImage();
-  }
-  return false;
 }
 
 function saveHighResImage() {
-  let scaleFactor = 5; // Factor de escala para alta resolución
+  let scaleFactor = 5;
   let highResCanvas = createGraphics(width * scaleFactor, height * scaleFactor);
   highResCanvas.noStroke();
-  highResCanvas.background(200); // Fondo blanco en la imagen de alta resolución
+  highResCanvas.background(255);
 
-  // Redibujar la escena en la imagen de alta resolución
   highResCanvas.translate(highResCanvas.width / width, highResCanvas.height / height);
-  
   highResCanvas.image(get(), 0, 0, highResCanvas.width, highResCanvas.height);
 
   highResCanvas.save(`myfile-${hour()}${minute()}${second()}_highres.jpg`);
 }
 
 function startAudio() {
-  for (let i = 0; i < numSines; i++) {
-    sineWaves[i].start();
+  if (!audioStarted) {
+    for (let i = 0; i < numSines; i++) {
+      sineWaves[i].start();
+    }
+    audioStarted = true;
   }
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight); // Reajusta el canvas al tamaño completo
-  background(200); // Fondo blanco
-}
-// Función para solicitar pantalla completa
-function requestFullscreen() {
-  let elem = document.documentElement;
-  if (elem.requestFullscreen) {1
-    elem.requestFullscreen();
-  } else if (elem.mozRequestFullScreen) { // Firefox
-    elem.mozRequestFullScreen();
-  } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { // IE/Edge
-    elem.msRequestFullscreen();
-  }
+  resizeCanvas(windowWidth, windowHeight);
+  background(255);
 }
