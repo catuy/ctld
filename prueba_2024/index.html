@@ -45,4 +45,10 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js')
-          .then(registratio
+          .then(registration => console.log('Service Worker registrado:', registration))
+          .catch(error => console.log('Service Worker no registrado:', error));
+      });
+    }
+  </script>
+</body>
+</html>
