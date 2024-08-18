@@ -12,7 +12,7 @@ let modulator;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke();
-  background(255);
+  background(155, 15, 55);
 
   x = width / 2;
   y = height / 2;
