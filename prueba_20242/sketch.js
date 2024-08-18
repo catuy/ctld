@@ -9,7 +9,7 @@ function setup() {
 
   x = width / 2;
   y = height / 2;
-  elipssewidth = 30;
+  elipssewidth = 80;
 }
 
 function draw() {
