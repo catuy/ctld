@@ -10,36 +10,30 @@
 
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
-  </head>
-
-  <body>
-    <!-- <script src="sketch.js" async></script> -->
     <script>
       let deferredPrompt;
       let installOffered = localStorage.getItem('installOffered');
 
       window.addEventListener('beforeinstallprompt', (e) => {
-        if (!installOffered) {
-          e.preventDefault();
-          deferredPrompt = e;
-          // Intentar la instalación automática después de interacción suficiente
-          document.addEventListener('click', tryAutoInstall);
+        e.preventDefault();
+        deferredPrompt = e;
+        // Llama a la función en sketch.js para intentar la instalación
+        if (window.sketchReady) {
+          window.sketchReady();
         }
       });
 
-      function tryAutoInstall() {
+      function installApp() {
         if (deferredPrompt) {
           deferredPrompt.prompt();
           deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
-              console.log('PWA instalada automáticamente');
+              console.log('PWA instalada');
             } else {
               console.log('PWA no instalada');
             }
-            // Marca la instalación como ofrecida en la sesión
             localStorage.setItem('installOffered', 'true');
             deferredPrompt = null;
-            document.removeEventListener('click', tryAutoInstall);
           });
         }
       }
@@ -54,5 +48,8 @@
         });
       }
     </script>
+  </head>
+  <body>
+    <script src="sketch.js"></script>
   </body>
 </html>
