@@ -11,7 +11,6 @@
     <script src="libraries/p5.min.js"></script>
     <script>
       let deferredPrompt;
-      let installOffered = false;
 
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -19,15 +18,9 @@
       });
 
       function attemptInstall() {
-        if (deferredPrompt && !installOffered) {
+        if (deferredPrompt) {
           deferredPrompt.prompt();
           deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              console.log('PWA instalada');
-            } else {
-              console.log('PWA no instalada');
-            }
-            installOffered = true; // Se marca como ofrecida
             deferredPrompt = null;
           });
         }
@@ -35,9 +28,7 @@
 
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('service-worker.js').then((registration) => {
-            console.log('Service Worker registrado con éxito:', registration);
-          }).catch((error) => {
+          navigator.serviceWorker.register('service-worker.js').catch((error) => {
             console.log('Error al registrar el Service Worker:', error);
           });
         });
@@ -45,6 +36,10 @@
     </script>
   </head>
   <body>
+    <div id="button-container">
+      <button id="pause-button">Pausar</button>
+      <button id="save-button">Guardar Imagen</button>
+    </div>
     <script src="sketch.js"></script>
   </body>
 </html>
