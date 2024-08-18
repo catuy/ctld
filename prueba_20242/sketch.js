@@ -10,11 +10,20 @@ function setup() {
   x = width / 2;
   y = height / 2;
   ellipseWidth = 80;
+
+  // Crear botones en la interfaz
+  let pauseButton = createButton('Pausar');
+  pauseButton.position(10, 10);
+  pauseButton.mousePressed(togglePause);
+
+  let saveButton = createButton('Guardar Imagen');
+  saveButton.position(10, 40);
+  saveButton.mousePressed(saveHighResImage);
 }
 
 function draw() {
   if (!paused) {
-    if (!mouseIsPressed && touches.length <= 1) {
+    if (!mouseIsPressed && touches.length === 0) {
       x += (noise(frameCount * 0.01) - 0.5) * 30;
       y += (noise(frameCount * 0.02) - 0.5) * 30;
     } else if (touches.length === 1) {
@@ -25,28 +34,25 @@ function draw() {
     x = constrain(x, ellipseWidth / 2, width - ellipseWidth / 2);
     y = constrain(y, ellipseWidth / 2, height - ellipseWidth / 2);
 
-    fill(0);
-    ellipse(x, y, ellipseWidth, ellipseWidth);
+    let p = get(x - 50, y - 50, 200, 200);
+    p.filter(INVERT);
+    image(p, x, y, ellipseWidth, ellipseWidth);
+
+    imageMode(CENTER);
   }
+}
+
+function mousePressed() {
+  attemptInstall();
 }
 
 function touchStarted() {
-  // Para dispositivos móviles, detectar si es un toque doble para pausar
-  if (touches.length === 2) {
-    paused = !paused;
-    return false; // Evitar comportamiento predeterminado
-  } else if (touches.length === 3) {
-    saveHighResImage();
-  }
+  // Prevenir el comportamiento predeterminado para evitar conflictos
   return false;
 }
 
-function keyPressed() {
-  if (key === 'p') {
-    paused = !paused;
-  } else if (key === 's') {
-    saveHighResImage();
-  }
+function togglePause() {
+  paused = !paused;
 }
 
 function saveHighResImage() {
