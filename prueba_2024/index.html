@@ -1,52 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json">
-  <title>PWA Test</title>
+  <title>p5.js App</title>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <!-- <script src="libraries/p5.min.js"></script> -->
+  <!-- <script src="libraries/p5.sound.min.js"></script> -->
 </head>
+
 <body>
   <script>
     let deferredPrompt;
 
-    // Evento que se dispara cuando la PWA es instalable
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      console.log('beforeinstallprompt disparado');
-      showInstallButton(); // Muestra el botón de instalación
-    });
 
-    // Función para mostrar el botón de instalación
-    function showInstallButton() {
-      let installButton = document.createElement('button');
-      installButton.innerText = "Instalar App";
-      installButton.style.position = 'fixed';
-      installButton.style.bottom = '20px';
-      installButton.style.left = '20px';
-      installButton.style.padding = '10px 20px';
-      installButton.style.fontSize = '16px';
-      document.body.appendChild(installButton);
-
-      // Evento para manejar la instalación
-      installButton.addEventListener('click', async () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
+      // Intentar la instalación automática después de una pequeña interacción
+      setTimeout(async () => {
+        try {
+          await deferredPrompt.prompt();
           const { outcome } = await deferredPrompt.userChoice;
           console.log(`PWA instalación ${outcome}`);
           deferredPrompt = null;
-          installButton.remove();
+        } catch (error) {
+          console.log('Error durante la instalación automática:', error);
+          showInstallButton(); // Si falla la instalación automática, mostrar el botón
         }
+      }, 3000); // Tiempo de espera antes de intentar la instalación automática
+    });
+
+    function showInstallButton() {
+      let installButton = document.createElement('button');
+      installButton.innerText = "Instalar App";
+      document.body.appendChild(installButton);
+
+      installButton.addEventListener('click', async () => {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          console.log('PWA instalada manualmente');
+        } else {
+          console.log('PWA no instalada');
+        }
+        deferredPrompt = null;
+        installButton.remove();
       });
     }
+  </script>
 
-    // Registro del Service Worker
+  <!-- <script src="sketch.js"></script> -->
+
+  <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(registration => console.log('Service Worker registrado:', registration))
-          .catch(error => console.log('Service Worker no registrado:', error));
+        navigator.serviceWorker.register('service-worker.js').then((registration) => {
+          console.log('Service Worker registrado con éxito:', registration);
+        }).catch((error) => {
+          console.log('Error al registrar el Service Worker:', error);
+        });
       });
     }
   </script>
