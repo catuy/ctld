@@ -1,18 +1,18 @@
-let sineWaves = [];
-let sineFreq = [];
-let numSines = 8;
+let sineWaves = []; // Array de osciladores sinusoidales
+let sineFreq = []; // Array de frecuencias
+let numSines = 8; // Número de osciladores
 
 let x, y;
 let elipssewidth;
 let audioStarted = false;
 let paused = false;
 
-let modulator;
+let modulator; // Modulator for FM synthesis
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight); // Canvas al 100% de la pantalla
   noStroke();
-  background(255);
+  background(255); // Fondo blanco
 
   x = width / 2;
   y = height / 2;
@@ -26,10 +26,14 @@ function setup() {
     sineFreq.push(0);
   }
 
+  // Setup modulator for FM synthesis
   modulator = new p5.Oscillator('sine');
-  modulator.freq(5);
+  modulator.freq(5); // Low-frequency modulation
   modulator.amp(50);
   modulator.start();
+
+  // Detecta interacción del usuario
+  document.addEventListener('click', userInteractionDetected);
 }
 
 function draw() {
@@ -42,15 +46,14 @@ function draw() {
       y = mouseY;
     }
 
+    // Limita el movimiento al área del canvas
     x = constrain(x, elipssewidth / 2, width - elipssewidth / 2);
     y = constrain(y, elipssewidth / 2, height - elipssewidth / 2);
 
     if (audioStarted) {
       let yoffset = map(y, 0, height, 0, 1);
       let frequency = pow(1000, yoffset) + 150;
-      let detune = map(x, 0, width, -0.5, 0.5);
-
-      modulator.freq(map(x, 0, width, 1, 10));
+      modulator.freq(map(x, 0, width, 1, 10)); // Frecuencia del modulador basada en la posición del mouse
 
       for (let i = 0; i < numSines; i++) {
         sineFreq[i] = frequency * (i + 1) + modulator.amp() * sin(TWO_PI * modulator.freq() * frameCount / 60);
@@ -60,23 +63,8 @@ function draw() {
       let p = get(x - 50, y - 50, 200, 200);
       p.filter(INVERT);
       image(p, x, y, elipssewidth, elipssewidth);
-    } else {
-      fill(0);
     }
-
-    imageMode(CENTER);
   }
-}
-
-function mousePressed() {
-  startAudio();
-  attemptInstall();
-}
-
-function touchStarted() {
-  startAudio();
-  attemptInstall();
-  return false;
 }
 
 function keyPressed() {
@@ -87,28 +75,43 @@ function keyPressed() {
   }
 }
 
+function touchStarted() {
+  if (!audioStarted) {
+    startAudio();
+    audioStarted = true;
+  } else {
+    paused = !paused;
+  }
+  return false;
+}
+
+function touchEnded() {
+  if (touches.length === 2) {
+    saveHighResImage();
+  }
+  return false;
+}
+
 function saveHighResImage() {
-  let scaleFactor = 5;
+  let scaleFactor = 5; // Factor de escala para alta resolución
   let highResCanvas = createGraphics(width * scaleFactor, height * scaleFactor);
   highResCanvas.noStroke();
-  highResCanvas.background(255);
+  highResCanvas.background(255); // Fondo blanco en la imagen de alta resolución
 
   highResCanvas.translate(highResCanvas.width / width, highResCanvas.height / height);
+  
   highResCanvas.image(get(), 0, 0, highResCanvas.width, highResCanvas.height);
 
   highResCanvas.save(`myfile-${hour()}${minute()}${second()}_highres.jpg`);
 }
 
 function startAudio() {
-  if (!audioStarted) {
-    for (let i = 0; i < numSines; i++) {
-      sineWaves[i].start();
-    }
-    audioStarted = true;
+  for (let i = 0; i < numSines; i++) {
+    sineWaves[i].start();
   }
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  background(255);
+  resizeCanvas(windowWidth, windowHeight); // Reajusta el canvas al tamaño completo
+  background(255); // Fondo blanco
 }

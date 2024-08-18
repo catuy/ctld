@@ -1,51 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json">
-    <title>p5.js App</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <title>p5.js App</title>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-    <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
-    <script>
-      let deferredPrompt;
-      let installOffered = false;
+  <script src="libraries/p5.min.js"></script>
+  <script src="libraries/p5.sound.min.js"></script>
+  <script src="pwa-setup.js"></script> <!-- Archivo separado para la lógica de PWA -->
+</head>
 
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-      });
-
-      function attemptInstall() {
-        if (deferredPrompt && !installOffered) {
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              console.log('PWA instalada');
-            } else {
-              console.log('PWA no instalada');
-            }
-            installOffered = true; // Se marca como ofrecida
-            deferredPrompt = null;
-          });
-        }
-      }
-
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('service-worker.js').then((registration) => {
-            console.log('Service Worker registrado con éxito:', registration);
-          }).catch((error) => {
-            console.log('Error al registrar el Service Worker:', error);
-          });
-        });
-      }
-    </script>
-  </head>
-  <body>
-    <script src="sketch.js"></script>
-  </body>
+<body>
+  <script src="sketch.js"></script> <!-- Archivo separado para el sketch -->
+</body>
 </html>
