@@ -13,40 +13,36 @@
   </head>
 
   <body>
-    <!-- <script src="sketch.js"></script> -->
+    <script src="sketch.js"></script>
     <script>
       let deferredPrompt;
-      let interactionCount = 0; // Contador de interacciones
+      let installOffered = localStorage.getItem('installOffered');
 
       window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
+        if (!installOffered) {
+          e.preventDefault();
+          deferredPrompt = e;
+          // Intentar la instalación automática después de interacción suficiente
+          document.addEventListener('click', tryAutoInstall);
+        }
       });
 
-      // Detectar interacciones del usuario
-      function userInteracted() {
-        interactionCount++;
-        if (interactionCount > 5 && deferredPrompt) { // Se puede ajustar el número de interacciones
-          triggerPWAInstall();
+      function tryAutoInstall() {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('PWA instalada automáticamente');
+            } else {
+              console.log('PWA no instalada');
+            }
+            // Marca la instalación como ofrecida en la sesión
+            localStorage.setItem('installOffered', 'true');
+            deferredPrompt = null;
+            document.removeEventListener('click', tryAutoInstall);
+          });
         }
       }
-
-      function triggerPWAInstall() {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('PWA instalada');
-          } else {
-            console.log('PWA no instalada');
-          }
-          deferredPrompt = null;
-        });
-      }
-
-      // Escuchar varios eventos de interacción
-      window.addEventListener('click', userInteracted);
-      window.addEventListener('mousemove', userInteracted);
-      window.addEventListener('touchstart', userInteracted);
 
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
