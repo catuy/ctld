@@ -116,7 +116,7 @@ function saveHighResImage() {
   let scaleFactor = 5; // Factor de escala para alta resolución
   let highResCanvas = createGraphics(width * scaleFactor, height * scaleFactor);
   highResCanvas.noStroke();
-  highResCanvas.background(255); // Fondo blanco en la imagen de alta resolución
+  highResCanvas.background(200); // Fondo blanco en la imagen de alta resolución
 
   // Redibujar la escena en la imagen de alta resolución
   highResCanvas.translate(highResCanvas.width / width, highResCanvas.height / height);
@@ -136,11 +136,10 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight); // Reajusta el canvas al tamaño completo
   background(200); // Fondo blanco
 }
-
 // Función para solicitar pantalla completa
 function requestFullscreen() {
   let elem = document.documentElement;
-  if (elem.requestFullscreen) {
+  if (elem.requestFullscreen) {1
     elem.requestFullscreen();
   } else if (elem.mozRequestFullScreen) { // Firefox
     elem.mozRequestFullScreen();
