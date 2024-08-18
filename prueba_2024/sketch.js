@@ -12,11 +12,11 @@ let modulator; // Modulator for FM synthesis
 function setup() {
   createCanvas(windowWidth, windowHeight); // Canvas al 100% de la pantalla
   noStroke();
-  background(255); // Fondo blanco
+  background(200); // Fondo blanco
 
   x = width / 2;
   y = height / 2;
-  elipssewidth = 80;
+  elipssewidth = 20;
 
   for (let i = 0; i < numSines; i++) {
     let sineVolume = (1.0 / numSines) / (i + 1);
@@ -32,12 +32,8 @@ function setup() {
   modulator.amp(50);
   modulator.start();
 
-  // Notifica a index.html que el sketch está listo
-  window.sketchReady = function() {
-    if (!localStorage.getItem('installOffered')) {
-      installApp();
-    }
-  };
+  // Solicitar pantalla completa al iniciar
+  // requestFullscreen();
 }
 
 function draw() {
@@ -87,16 +83,25 @@ function keyPressed() {
     saveHighResImage();
   } else if (key === 'p') {
     paused = !paused;
+  } else if (key === 'f') {
+    // requestFullscreen();
   }
 }
 
 function touchStarted() {
   if (!audioStarted) {
-    startAudio();
-    audioStarted = true;
+    userStartAudio().then(() => {
+      console.log("Audio context started");
+      startAudio();
+      audioStarted = true;
+    }).catch((error) => {
+      console.log("Error starting audio context:", error);
+    });
   } else {
     paused = !paused;
   }
+
+  // requestFullscreen(); // Intentar poner en fullscreen al tocar la pantalla
   return false;
 }
 
@@ -111,7 +116,7 @@ function saveHighResImage() {
   let scaleFactor = 5; // Factor de escala para alta resolución
   let highResCanvas = createGraphics(width * scaleFactor, height * scaleFactor);
   highResCanvas.noStroke();
-  highResCanvas.background(255); // Fondo blanco en la imagen de alta resolución
+  highResCanvas.background(200); // Fondo blanco en la imagen de alta resolución
 
   // Redibujar la escena en la imagen de alta resolución
   highResCanvas.translate(highResCanvas.width / width, highResCanvas.height / height);
@@ -129,5 +134,18 @@ function startAudio() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight); // Reajusta el canvas al tamaño completo
-  background(255); // Fondo blanco
+  background(200); // Fondo blanco
+}
+// Función para solicitar pantalla completa
+function requestFullscreen() {
+  let elem = document.documentElement;
+  if (elem.requestFullscreen) {1
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { // Firefox
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { // IE/Edge
+    elem.msRequestFullscreen();
+  }
 }
