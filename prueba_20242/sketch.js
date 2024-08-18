@@ -1,5 +1,5 @@
 let x, y;
-let elipssewidth;
+let ellipseWidth;
 let paused = false;
 
 function setup() {
@@ -9,44 +9,43 @@ function setup() {
 
   x = width / 2;
   y = height / 2;
-  elipssewidth = 80;
+  ellipseWidth = 80;
 }
 
 function draw() {
   if (!paused) {
-    if (!mouseIsPressed) {
+    if (!mouseIsPressed && touches.length <= 1) {
       x += (noise(frameCount * 0.01) - 0.5) * 30;
       y += (noise(frameCount * 0.02) - 0.5) * 30;
-    } else {
-      x = mouseX;
-      y = mouseY;
+    } else if (touches.length === 1) {
+      x = touches[0].x;
+      y = touches[0].y;
     }
 
-    x = constrain(x, elipssewidth / 2, width - elipssewidth / 2);
-    y = constrain(y, elipssewidth / 2, height - elipssewidth / 2);
+    x = constrain(x, ellipseWidth / 2, width - ellipseWidth / 2);
+    y = constrain(y, ellipseWidth / 2, height - ellipseWidth / 2);
 
-    let p = get(x - 50, y - 50, 200, 200);
-    p.filter(INVERT);
-    image(p, x, y, elipssewidth, elipssewidth);
-
-    imageMode(CENTER);
+    fill(0);
+    ellipse(x, y, ellipseWidth, ellipseWidth);
   }
 }
 
-function mousePressed() {
-  attemptInstall();
-}
-
 function touchStarted() {
-  attemptInstall();
+  // Para dispositivos móviles, detectar si es un toque doble para pausar
+  if (touches.length === 2) {
+    paused = !paused;
+    return false; // Evitar comportamiento predeterminado
+  } else if (touches.length === 3) {
+    saveHighResImage();
+  }
   return false;
 }
 
 function keyPressed() {
-  if (key === 's') {
-    saveHighResImage();
-  } else if (key === 'p') {
+  if (key === 'p') {
     paused = !paused;
+  } else if (key === 's') {
+    saveHighResImage();
   }
 }
 
