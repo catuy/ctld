@@ -1,6 +1,13 @@
+let sineWaves = [];
+let sineFreq = [];
+let numSines = 8;
+
 let x, y;
-let ellipseWidth;
+let elipssewidth;
+let audioStarted = false;
 let paused = false;
+
+let modulator;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -9,50 +16,75 @@ function setup() {
 
   x = width / 2;
   y = height / 2;
-  ellipseWidth = 80;
+  elipssewidth = 80;
 
-  // Crear botones en la interfaz
-  let pauseButton = createButton('Pausar');
-  pauseButton.position(10, 10);
-  pauseButton.mousePressed(togglePause);
+  for (let i = 0; i < numSines; i++) {
+    let sineVolume = (1.0 / numSines) / (i + 1);
+    let osc = new p5.Oscillator('sine');
+    osc.amp(sineVolume);
+    sineWaves.push(osc);
+    sineFreq.push(0);
+  }
 
-  let saveButton = createButton('Guardar Imagen');
-  saveButton.position(10, 40);
-  saveButton.mousePressed(saveHighResImage);
+  modulator = new p5.Oscillator('sine');
+  modulator.freq(5);
+  modulator.amp(50);
+  modulator.start();
 }
 
 function draw() {
   if (!paused) {
-    if (!mouseIsPressed && touches.length === 0) {
+    if (!mouseIsPressed) {
       x += (noise(frameCount * 0.01) - 0.5) * 30;
       y += (noise(frameCount * 0.02) - 0.5) * 30;
-    } else if (touches.length === 1) {
-      x = touches[0].x;
-      y = touches[0].y;
+    } else {
+      x = mouseX;
+      y = mouseY;
     }
 
-    x = constrain(x, ellipseWidth / 2, width - ellipseWidth / 2);
-    y = constrain(y, ellipseWidth / 2, height - ellipseWidth / 2);
+    x = constrain(x, elipssewidth / 2, width - elipssewidth / 2);
+    y = constrain(y, elipssewidth / 2, height - elipssewidth / 2);
 
-    let p = get(x - 50, y - 50, 200, 200);
-    p.filter(INVERT);
-    image(p, x, y, ellipseWidth, ellipseWidth);
+    if (audioStarted) {
+      let yoffset = map(y, 0, height, 0, 1);
+      let frequency = pow(1000, yoffset) + 150;
+      let detune = map(x, 0, width, -0.5, 0.5);
+
+      modulator.freq(map(x, 0, width, 1, 10));
+
+      for (let i = 0; i < numSines; i++) {
+        sineFreq[i] = frequency * (i + 1) + modulator.amp() * sin(TWO_PI * modulator.freq() * frameCount / 60);
+        sineWaves[i].freq(sineFreq[i]);
+      }
+
+      let p = get(x - 50, y - 50, 200, 200);
+      p.filter(INVERT);
+      image(p, x, y, elipssewidth, elipssewidth);
+    } else {
+      fill(0);
+    }
 
     imageMode(CENTER);
   }
 }
 
 function mousePressed() {
+  startAudio();
   attemptInstall();
 }
 
 function touchStarted() {
-  // Prevenir el comportamiento predeterminado para evitar conflictos
+  startAudio();
+  attemptInstall();
   return false;
 }
 
-function togglePause() {
-  paused = !paused;
+function keyPressed() {
+  if (key === 's') {
+    saveHighResImage();
+  } else if (key === 'p') {
+    paused = !paused;
+  }
 }
 
 function saveHighResImage() {
@@ -65,6 +97,15 @@ function saveHighResImage() {
   highResCanvas.image(get(), 0, 0, highResCanvas.width, highResCanvas.height);
 
   highResCanvas.save(`myfile-${hour()}${minute()}${second()}_highres.jpg`);
+}
+
+function startAudio() {
+  if (!audioStarted) {
+    for (let i = 0; i < numSines; i++) {
+      sineWaves[i].start();
+    }
+    audioStarted = true;
+  }
 }
 
 function windowResized() {
