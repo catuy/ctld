@@ -51,7 +51,7 @@ function draw() {
 
       // Dibujar la animación
       fill(anim.color);
-      // ellipse(anim.x, anim.y, anim.width);
+      ellipse(anim.x, anim.y, anim.width);
     }
 
     imageMode(CENTER);
