@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Info
-permalink: /info/
+title: About
+permalink: /about/
 ---
 Diseñador cross-media, artista visual y docente. Vivo y hago en Montevideo, Uruguay.
 

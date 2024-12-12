@@ -40,8 +40,8 @@ navigation:
     url: /
   - title: Work
     url: /work/
-  - title: Art
-    url: /art/
+  - title: About
+    url: /about/
 
 # Nav categories
 navcategories:
