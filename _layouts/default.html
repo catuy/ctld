@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body id="body">
+
+    <div class="container">
+
+      <!-- Área principal -->
+      <div class="main item">
+        <!-- Columna que abarca el largo de las dos -->
+        <div class="full-column">
+          {{ content }}
+        </div>
+      </div>
+        {%- include footer.html -%}
+      </div>
+
+      <!-- Menú fijo a la derecha -->
+      <div class="menu item">
+        {%- include header.html -%}
+      </div>
+    </div>
+
+  </body>
+
+</html>
