@@ -2,6 +2,7 @@
 layout: post
 title:  "d--i--e--g--o--c--a--t--a--l--d--o"
 date:   2023-02-12 17:12:19 -0300
+description: "This is a short description about the About page."
 categories: todos
 image: /assets/blogimages/tiles/cat.gif
 tags: [Web]

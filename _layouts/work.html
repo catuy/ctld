@@ -5,12 +5,17 @@ layout: default
 <div class="home">
 
   <article class="main-content">      
-    {%- if page.title -%}
+    <!-- {%- if page.title -%}
     <h1 class="page-heading">{{ page.title }}</h1>
-  {%- endif -%}
+  {%- endif -%} -->
+  <h1 class="page-heading">Professional highlights</h1>
+  <div class="multi-column">
+  {{ content }}
+  </div>
+  <h1 class="page-heading" style="margin-top:calc(var(--margin-top)*2)">Notable work and contributions</h1>
   {%- if site.posts.size > 0 -%}
     <!-- <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2> -->
-    <p class="nav-categorias">
+    <!-- <p class="nav-categorias">
       {% for item in site.navcategories %}
               {% assign class = nil %}
               {% if page.url == item.url %}
@@ -18,20 +23,22 @@ layout: default
               {% endif %}
             <a href="{{ item.url }}" class="{{ class }}">{{ item.title }}</a>
           {% endfor %}
-    </p>
-    {{ content }}
+    </p> -->
     <ul class="post-list">
       {% for post in site.categories[page.category] %}
         <li>
           {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}  
         {%- if post.image -%}
           <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }} 
+            <!-- <h1>{{ post.title | escape }}</h1> -->
+            {% if post.description %}
+            <h1>{{ post.description }}</h1>
+            {% endif %}
             <div class="filtered image-wrap">
             <img class="post-image" src="{{ post.image }}">
             </div>
           </a>
-          <span class="post-date">
+          <!-- <span class="post-date">
           [{{ post.date | date: "%Y" }}]
           </span>
             <span class="post-tags">
@@ -41,18 +48,12 @@ layout: default
                 {% assign tags = page.tags %}
               {% endif %}
               {% for tag in tags %}
-              <!-- <a href="{{site.baseurl}}/categories/#{{category|slugize}}"> -->
-                [{{tag}}]
-              <!-- </a> -->
               {% unless forloop.last %}&nbsp;{% endunless %}
               {% endfor %}
-            </span>
-        
+            </span> -->
           {% else %}
-          <a class="post-link">
-            {{ post.title | escape }} 
-          </a>
-          <span class="post-tags">[Próximamente]</span>
+          <h1>{{ post.description }}</h1>
+          <!-- <span class="post-tags">[Próximamente]</span> -->
           {%- endif -%}
         {%- if site.show_excerpts -%}
           {{ post.excerpt }}
