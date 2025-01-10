@@ -2,7 +2,7 @@
 layout: post
 title:  "d--i--e--g--o--c--a--t--a--l--d--o"
 date:   2023-02-12 17:12:19 -0300
-description: "This is a short description about the About page."
+description: "The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos
 image: /assets/blogimages/tiles/cat.gif
 tags: [Web]

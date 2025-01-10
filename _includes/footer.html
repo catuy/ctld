@@ -68,7 +68,7 @@
   </script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.main-content-home p a').forEach(link => {
+  document.querySelectorAll('.main-content a').forEach(link => {
     // Extraer imágenes del atributo title
     const imagesData = link.title.match(/!\[.*?\]\((.*?)\)/g);
     if (!imagesData) return;
