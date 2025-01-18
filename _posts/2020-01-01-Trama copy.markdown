@@ -2,6 +2,7 @@
 layout: post
 title:  "Trama.uy"
 date:   2020-03-21 17:12:19 -0300
+description: "TRAMA: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos consultorias
 image: /assets/blogimages/tiles/trama.jpg
 tags: [Web, Aplicación]

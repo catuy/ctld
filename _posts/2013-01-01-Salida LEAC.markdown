@@ -2,6 +2,7 @@
 layout: post
 title:  "LEAC"
 date:   2013-01-01 17:12:19 -0300
+description: "The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos academicos
 image: /assets/blogimages/tiles/leac.jpg
 tags: [Curso, Extensión]

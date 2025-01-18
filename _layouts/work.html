@@ -24,40 +24,22 @@ layout: default
     </p> -->
     <ul class="post-list">
       {% for post in site.categories[page.category] %}
-        <li>
-          {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}  
-        {%- if post.image -%}
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            <!-- <h1>{{ post.title | escape }}</h1> -->
-            {% if post.description %}
-            <h1>{{ post.description }}</h1>
+      {% if post.visible != false %}
+      <li>
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        {%- if post.images -%}
+        <a class="post-link" href="{{ post.url | relative_url }}" title="{% for image in post.images %}![Imagen]({{ image }}) {% endfor %}">
+          {% if post.description %}
+              <h1>{{ post.description }}</h1>
             {% endif %}
-            <div class="filtered image-wrap">
-            <img class="post-image" src="{{ post.image }}">
-            </div>
           </a>
-          <!-- <span class="post-date">
-          [{{ post.date | date: "%Y" }}]
-          </span>
-            <span class="post-tags">
-              {% if post %}
-                {% assign tags = post.tags %}
-              {% else %}
-                {% assign tags = page.tags %}
-              {% endif %}
-              {% for tag in tags %}
-              {% unless forloop.last %}&nbsp;{% endunless %}
-              {% endfor %}
-            </span> -->
-          {% else %}
+        {% else %}
           <h1>{{ post.description }}</h1>
-          <!-- <span class="post-tags">[Próximamente]</span> -->
-          {%- endif -%}
-        {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
-        {%- endif -%}
-        </li>
+        {% endif %}
+      </li>
+      
+        {% endif %}
       {% endfor %}
-    </ul>
   {%- endif -%}
+</ul>
   </article>

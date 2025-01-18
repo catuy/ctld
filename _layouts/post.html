@@ -13,3 +13,73 @@ layout: default
   </article>
 
 <script src="/assets/script.js"></script>
+
+<style>
+.row {
+  display: flex;
+  /* flex-wrap: wrap; */
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+  /* padding: 10px; */
+  box-sizing: border-box;
+}
+
+.row .column:first-child {
+    flex: 0 0 40%; /* 25% de ancho para la columna de texto */
+    padding-right: 10px;
+    position: sticky;
+    top: 100px; /* Sticky a 90px desde la parte superior */
+    align-self: flex-start; /* Para que el sticky funcione correctamente */
+    background: white; /* Fondo blanco para evitar superposiciones raras */
+    z-index: 1; /* Asegura que quede por encima si se solapa con otros elementos */
+  }
+
+  .row .column:last-child {
+    flex: 0 0 60%; /* 75% de ancho para la columna de imágenes/iframes */
+  }
+
+.column img,
+.column video,
+.column iframe {
+  max-width: 100%;
+  height: auto;
+  /* min-height: 750px; */
+}
+
+.column iframe {
+  height: auto;
+  min-height: 600px;
+}
+
+.image-wrap {
+  position: relative;
+}
+
+
+.fullscreen-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.fullscreen-btn:hover {
+  background-color: #0056b3;
+}
+
+.iframe-wrapper {
+    position: relative;
+    width: 100%; /* El iframe ocupa todo el ancho disponible */
+    padding-top: 56.25%; /* Relación de aspecto 16:9 como ejemplo */
+  }
+
+</style>
+

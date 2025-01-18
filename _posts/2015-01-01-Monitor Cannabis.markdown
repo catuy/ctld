@@ -2,6 +2,7 @@
 layout: post
 title:  "Monitor Cannabis"
 date:   2015-01-01 17:12:19 -0300
+description: "The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos consultorias
 image: /assets/blogimages/tiles/monitor.gif
 tags: [Web]

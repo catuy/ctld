@@ -6,8 +6,8 @@
     // array of file paths
     var scripts = [
         '/assets/heads/1.js',
-        '/assets/heads/2.js',
-        '/assets/heads/3.js',
+        // '/assets/heads/2.js',
+        // '/assets/heads/3.js',
     ];
 
     // check if script path is already stored in sessionStorage
@@ -49,7 +49,7 @@
     preloader.style.display = "none";
   });
 </script>
-<script>
+<!-- <script>
   document.addEventListener("DOMContentLoaded", function() {
     document.body.style.opacity = 0;
     document.body.style.transition = "opacity 200ms";
@@ -65,159 +65,149 @@
     });
   });
   });
-  </script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.main-content a').forEach(link => {
-    // Extraer imágenes del atributo title
-    const imagesData = link.title.match(/!\[.*?\]\((.*?)\)/g);
-    if (!imagesData) return;
-
-    // Crear elementos <div> que contendrán la imagen y la barra de navegador
-    const imageWrappers = imagesData.map(data => {
-      const url = data.match(/\((.*?)\)/)[1]; // Extraer URL
-
-      // Crear el contenedor principal
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('image-wrapper'); // Agregar la clase aquí
-      wrapper.style.display = 'none';
-      wrapper.style.position = 'fixed';
-      wrapper.style.border = '1px solid var(--color-primary)'; // Borde de la imagen
-      wrapper.style.borderRadius = '8px'; // Esquinas redondeadas
-      wrapper.style.overflow = 'hidden';
-      wrapper.style.zIndex = '1000'; // Asegurarse de que esté por encima de otros elementos
-      document.body.appendChild(wrapper);
-
-      // Crear la barra de navegador
-      const navBar = document.createElement('div');
-      navBar.style.background = '#fff';
-      navBar.style.borderBottom = '1px solid var(--color-primary)';
-      navBar.style.height = '30px';
-      navBar.style.display = 'flex';
-      navBar.style.alignItems = 'center';
-      navBar.style.padding = '0 8px';
-      navBar.style.boxSizing = 'border-box';
-
-      // Crear las "bolitas" de la barra
-      ['#fff', '#fff', '#fff'].forEach(color => {
-        const circle = document.createElement('span');
-        circle.style.width = '8px';
-        circle.style.height = '8px';
-        circle.style.backgroundColor = color;
-        circle.style.borderRadius = '50%';
-        circle.style.marginRight = '6px';
-        circle.style.border = '1px solid var(--color-primary)';
-        navBar.appendChild(circle);
-      });
-
-      // Crear la imagen
-      const img = document.createElement('img');
-      img.src = url;
-      img.style.objectFit = 'contain';
-
-      // Ajustar el tamaño de la imagen cuando se cargue
-      img.onload = () => {
-        const isLandscape = img.naturalWidth > img.naturalHeight;
-        if (isLandscape) {
-          wrapper.style.width = '40%';
-          wrapper.style.height = 'auto';
-        } else {
-          wrapper.style.width = 'auto';
-          wrapper.style.height = '50%';
-        }
-        // Asegurar que la imagen se adapte al contenedor
-        img.style.width = '100%';
-        img.style.height = 'calc(100% - 30px)';
+  </script> -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const initializeHoverEffect = (elements, extractImagesCallback) => {
+        elements.forEach(element => {
+          const imagesData = extractImagesCallback(element);
+          if (!imagesData) return;
+  
+          const imageWrappers = imagesData.map(data => {
+            const url = data.match(/\((.*?)\)/)?.[1] || data;
+  
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('image-wrapper');
+            wrapper.style.display = 'none';
+            wrapper.style.position = 'fixed'; // Asegura que la imagen se mantenga fija en la pantalla
+            wrapper.style.border = '1px solid var(--color-primary)';
+            wrapper.style.borderRadius = '8px';
+            wrapper.style.overflow = 'hidden';
+            wrapper.style.zIndex = '1000';
+            document.body.appendChild(wrapper);
+  
+            const navBar = document.createElement('div');
+            navBar.style.background = '#fff';
+            navBar.style.borderBottom = '1px solid var(--color-primary)';
+            navBar.style.height = '30px';
+            navBar.style.display = 'flex';
+            navBar.style.alignItems = 'center';
+            navBar.style.padding = '0 8px';
+            navBar.style.boxSizing = 'border-box';
+  
+            ['#fff', '#fff', '#fff'].forEach(color => {
+              const circle = document.createElement('span');
+              circle.style.width = '8px';
+              circle.style.height = '8px';
+              circle.style.backgroundColor = color;
+              circle.style.borderRadius = '50%';
+              circle.style.marginRight = '6px';
+              circle.style.border = '1px solid var(--color-primary)';
+              navBar.appendChild(circle);
+            });
+  
+            const img = document.createElement('img');
+            img.src = url;
+            img.style.objectFit = 'contain';
+  
+            img.onload = () => {
+              const isLandscape = img.naturalWidth > img.naturalHeight;
+              if (isLandscape) {
+                wrapper.style.width = '40%';
+                wrapper.style.height = 'auto';
+              } else {
+                wrapper.style.width = 'auto';
+                wrapper.style.height = '50%';
+              }
+              img.style.width = '100%';
+              img.style.height = 'calc(100% - 30px)';
+            };
+  
+            wrapper.appendChild(navBar);
+            wrapper.appendChild(img);
+  
+            return wrapper;
+          });
+  
+          let lastImageIndex = 0;
+          let lastMouseX = 0;
+          let lastMouseY = 0;
+          const threshold = 20;
+  
+          const showNextImage = () => {
+            imageWrappers.forEach(wrapper => (wrapper.style.display = 'none'));
+            lastImageIndex = (lastImageIndex + 1) % imageWrappers.length;
+            imageWrappers[lastImageIndex].style.display = 'block';
+          };
+  
+          element.addEventListener('mouseenter', () => {
+            lastMouseX = 0;
+            lastMouseY = 0;
+  
+            if (imageWrappers.length > 0) {
+              imageWrappers[lastImageIndex].style.display = 'block';
+            }
+  
+            element.addEventListener('mouseleave', () => {
+              imageWrappers.forEach(wrapper => (wrapper.style.display = 'none'));
+              lastImageIndex = 0;
+            });
+          });
+  
+          element.addEventListener('mousemove', event => {
+            const deltaX = Math.abs(event.pageX - lastMouseX);
+            const deltaY = Math.abs(event.pageY - lastMouseY);
+  
+            if (deltaX > threshold || deltaY > threshold) {
+              showNextImage();
+              lastMouseX = event.pageX;
+              lastMouseY = event.pageY;
+            }
+  
+            imageWrappers.forEach(wrapper => {
+              let left = event.pageX + 10;
+              let top = event.pageY + 10;
+  
+              // Ajustar la posición vertical para que no se vea afectada por el scroll
+              top = event.pageY - window.scrollY + 10;
+  
+              const screenCenterX = window.innerWidth / 2;
+              const screenCenterY = window.innerHeight / 2;
+  
+              if (event.pageX > screenCenterX) {
+                left = event.pageX - wrapper.offsetWidth - 10;
+              }
+  
+              if (event.pageY > screenCenterY) {
+                top = event.pageY - window.scrollY - wrapper.offsetHeight - 10;
+              }
+  
+              if (left + wrapper.offsetWidth > window.innerWidth) {
+                left = window.innerWidth - wrapper.offsetWidth - 10;
+              }
+              if (top + wrapper.offsetHeight > window.innerHeight) {
+                top = window.innerHeight - wrapper.offsetHeight - 10;
+              }
+              if (left < 10) left = 10;
+              if (top < 10) top = 10;
+  
+              wrapper.style.left = `${left}px`;
+              wrapper.style.top = `${top}px`;
+            });
+          });
+        });
       };
-
-      // Ensamblar la estructura
-      wrapper.appendChild(navBar);
-      wrapper.appendChild(img);
-
-      return wrapper;
-    });
-
-    let lastImageIndex = 0;
-    let lastMouseX = 0;
-    let lastMouseY = 0;
-    const threshold = 20; // Distancia mínima para cambiar la imagen
-
-    const showNextImage = () => {
-      imageWrappers.forEach(wrapper => (wrapper.style.display = 'none')); // Ocultar todos los contenedores
-      lastImageIndex = (lastImageIndex + 1) % imageWrappers.length; // Ciclar al siguiente índice
-      imageWrappers[lastImageIndex].style.display = 'block'; // Mostrar el siguiente contenedor
-    };
-
-    link.addEventListener('mouseenter', () => {
-      // Eliminar el atributo title cuando el mouse entra
-      const originalTitle = link.title;
-      link.removeAttribute('title');
-      
-      lastMouseX = 0;
-      lastMouseY = 0;
-
-      // Mostrar el primer contenedor
-      if (imageWrappers.length > 0) {
-        imageWrappers[lastImageIndex].style.display = 'block';
-      }
-
-      // Restaurar el title cuando el mouse sale
-      link.addEventListener('mouseleave', () => {
-        link.setAttribute('title', originalTitle); // Restaurar el título
-        imageWrappers.forEach(wrapper => (wrapper.style.display = 'none'));
-        lastImageIndex = 0; // Reiniciar al índice inicial
+  
+      // Inicializar el efecto en los enlaces con imágenes en el atributo title
+      initializeHoverEffect(document.querySelectorAll('.main-content a'), link => {
+        return link.title.match(/!\[.*?\]\((.*?)\)/g);
+      });
+  
+      // Inicializar el efecto en las imágenes destacadas
+      initializeHoverEffect(document.querySelectorAll('.post-image'), img => {
+        return [img.src]; // Usar directamente el atributo src de la imagen
       });
     });
-
-    link.addEventListener('mousemove', event => {
-      const deltaX = Math.abs(event.pageX - lastMouseX);
-      const deltaY = Math.abs(event.pageY - lastMouseY);
-
-      if (deltaX > threshold || deltaY > threshold) {
-        // Cambiar la imagen si la distancia recorrida supera el umbral
-        showNextImage();
-        lastMouseX = event.pageX;
-        lastMouseY = event.pageY;
-      }
-
-      // Ajustar la posición de la imagen según la lógica propuesta
-      imageWrappers.forEach(wrapper => {
-        let left = event.pageX + 10;
-        let top = event.pageY + 10;
-
-        // Lógica de ajuste según la posición del mouse en el navegador
-        const screenCenterX = window.innerWidth / 2;
-        const screenCenterY = window.innerHeight / 2;
-
-        // Si el cursor está a la izquierda del 50% del ancho de la pantalla, mostramos la imagen a la derecha
-        if (event.pageX > screenCenterX) {
-          left = event.pageX - wrapper.offsetWidth - 10;
-        }
-
-        // Si el cursor está a la derecha del 50% de la altura de la pantalla, mostramos la imagen arriba
-        if (event.pageY > screenCenterY) {
-          top = event.pageY - wrapper.offsetHeight - 10;
-        }
-
-        // Asegurarse de que la imagen no se salga por los bordes de la pantalla
-        if (left + wrapper.offsetWidth > window.innerWidth) {
-          left = window.innerWidth - wrapper.offsetWidth - 10;
-        }
-        if (top + wrapper.offsetHeight > window.innerHeight) {
-          top = window.innerHeight - wrapper.offsetHeight - 10;
-        }
-        if (left < 10) {
-          left = 10;
-        }
-        if (top < 10) {
-          top = 10;
-        }
-
-        // Establecer la nueva posición
-        wrapper.style.left = `${left}px`;
-        wrapper.style.top = `${top}px`;
-      });
-    });
-  });
-});
-</script>
+  </script>
+  
+  

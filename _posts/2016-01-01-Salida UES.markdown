@@ -2,6 +2,7 @@
 layout: post
 title:  "Salida: Una Escuela Sustentable"
 date:   2016-01-01 17:12:19 -0300
+description: "SALIDA: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos academicos
 image: /assets/blogimages/tiles/ues.jpg
 tags: [Curso, Extensión]

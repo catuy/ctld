@@ -2,6 +2,7 @@
 layout: post
 title:  "Untitled"
 date:   2021-01-01 17:12:19 -0300
+description: "ANII: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos artes-visuales
 image: /assets/blogimages/tiles/un-36.jpg
 tags: [Serigrafía, Arte generativo]
@@ -10,7 +11,7 @@ tags: [Serigrafía, Arte generativo]
 Serigrafía<br>70x100cm<br>7 tintas<br>
 Hojas Lucky Bird Woodfree 250g
 
-Proyecto seleccionado como finalista en la [International Biennial Print](https://printbiennial.ntmofa.gov.tw/print20/en/index.aspx){:target="_blank"}
+Proyecto seleccionado como finalista en la [International Biennial Print](https://printbiennial.ntmofa.gov.tw/print20/en/finalist.aspx){:target="_blank"}
  organizada por el Ministerio de Cultura de Taiwan y el National Taiwan Museum of Fine Arts. 
 
 <img class="post-image-full" src="/assets/blogimages/un-27.jpg">

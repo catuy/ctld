@@ -2,6 +2,7 @@
 layout: post
 title:  "HostBüro"
 date:   2014-12-21 17:12:19 -0300
+description: "The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos consultorias
 image: /assets/blogimages/tiles/hostburo.jpg
 tags: [Web]

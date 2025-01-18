@@ -2,6 +2,7 @@
 layout: post
 title:  "SQ Factory"
 date:   2019-01-01 17:12:19 -0300
+description: "REBOOT: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos consultorias
 image: /assets/blogimages/tiles/sq.jpg
 tags: [Web]

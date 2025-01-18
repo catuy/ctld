@@ -117,7 +117,7 @@ h1{
 .full-column {
   grid-column: span 2; /* Esta columna abarca dos columnas del grid */
   padding: var(--margin);
-  max-width: 800px;
+  max-width: 1024px;
 }
 
 .footer {
@@ -198,6 +198,7 @@ header{
       opacity: 1;
     }
   }
+  display: -webkit-box;
 }
 
 ul.post-list{
@@ -256,7 +257,7 @@ p.nav-categorias{
       float: left;
       border: 1px solid var(--color-primary);
       border-radius: 8px 8px 0 0;
-      margin-bottom: 60px;
+      margin-bottom: 30px;
 
       .wrap-header{
         height: var(--margin);
@@ -390,7 +391,7 @@ h1.page-heading{
 
 ul.post-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, calc(50% - 1rem)); /* 50% del ancho menos la mitad del gap */
   gap: 2rem; /* Espacio entre filas y columnas */
   list-style: none;
   padding: 0;
@@ -430,7 +431,6 @@ ul.post-list li {
 }
 .image-wrap {
   position: relative;
-  margin-bottom: 20px;
   border: 1px solid #ccc;
   padding: 0px;
   background-color: #f9f9f9;
@@ -452,4 +452,3 @@ ul.post-list li {
 .fullscreen-btn:hover {
   background-color: #0056b3;
 }
-

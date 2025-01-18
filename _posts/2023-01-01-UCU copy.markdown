@@ -5,5 +5,5 @@ date:   2023-2-1 17:12:19 -0300
 description: "The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos consultorias
 tags: [Web, Aplicación]
-# image: /assets/blogimages/tiles/anii.jpg
+image: /assets/blogimages/tiles/anii.jpg
 ---
