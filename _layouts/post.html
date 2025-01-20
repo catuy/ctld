@@ -14,6 +14,56 @@ layout: default
 
 <script src="/assets/script.js"></script>
 
+<script>
+  function adjustMediaElements() {
+      document.querySelectorAll('.image-wrap iframe, .image-wrap img, .image-wrap video').forEach(media => {
+          const isIframe = media.tagName.toLowerCase() === 'iframe';
+          const originalWidth = parseInt(media.getAttribute('width')) || media.offsetWidth;
+          const originalHeight = parseInt(media.getAttribute('height')) || media.offsetHeight;
+  
+          if (originalWidth && originalHeight) {
+              const aspectRatio = originalHeight / originalWidth;
+  
+              if (isIframe) {
+                  // Lógica específica para iframes
+                  if (aspectRatio > 1 && originalWidth < media.parentElement.offsetWidth) {
+                      // Caso portrait: limitar al ancho original y ajustar altura proporcionalmente
+                      media.style.width = `${originalWidth}px`;
+                      media.style.height = `${originalWidth * aspectRatio}px`;
+                      media.parentElement.style.maxWidth = `${originalWidth}px`;
+                  } else {
+                      // Caso landscape u otros: adaptarse al contenedor
+                      media.style.width = '100%';
+                      media.style.height = `${media.offsetWidth * aspectRatio}px`;
+                      media.parentElement.style.maxWidth = '100%';
+                  }
+              } else {
+                  // Lógica para imágenes y videos
+                  if (aspectRatio > 1 && originalHeight > originalWidth) {
+                      // Caso portrait: Ajuste proporcional
+                      media.style.width = 'auto';
+                      media.style.height = `${media.offsetWidth * aspectRatio}px`; // Ajusta la altura proporcionalmente
+                      media.parentElement.style.maxWidth = `${media.offsetWidth}px`; // Ajusta el contenedor
+                  } else {
+                      // Caso landscape o normal: Ajustar al ancho del contenedor
+                      media.style.width = '100%';
+                      media.style.height = 'auto';
+                      media.parentElement.style.maxWidth = '100%';
+                  }
+              }
+          }
+      });
+  }
+  
+  // Ejecutar al cargar la página
+  window.addEventListener('load', adjustMediaElements);
+  
+  // Vuelve a ajustar al cambiar el tamaño de la ventana
+  window.addEventListener('resize', adjustMediaElements);
+  </script>
+  
+
+
 <style>
 .row {
   display: flex;
@@ -42,44 +92,50 @@ layout: default
     flex: 0 0 60%; /* 75% de ancho para la columna de imágenes/iframes */
   }
 
-.column img,
-.column video,
-.column iframe {
-  max-width: 100%;
-  height: auto;
-  /* min-height: 750px; */
-}
-
-.column iframe {
-  height: auto;
-  min-height: 600px;
-}
-
-.image-wrap {
-  position: relative;
-}
-
-
 .fullscreen-btn {
   display: inline-block;
-  margin-top: 10px;
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
+  padding: 3px 5px 1px;
+  background-color: white;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary) !important;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .fullscreen-btn:hover {
-  background-color: #0056b3;
+  background-color: white;
 }
 
-.iframe-wrapper {
-    position: relative;
-    width: 100%; /* El iframe ocupa todo el ancho disponible */
-    padding-top: 56.25%; /* Relación de aspecto 16:9 como ejemplo */
-  }
+.image-wrap {
+  position: relative;
+  width: 100%; /* El contenedor es responsive */
+  height: auto; /* Permite que el iframe ajuste su altura */
+  margin-bottom: -7px;
+  overflow: hidden;
+}
+
+.image-wrap iframe {
+  width: 100%; /* Ajusta al ancho del contenedor */
+  display: block; /* Evita espacios blancos */
+  border: none !important; /* Sin bordes */
+}
+
+.image-wrap {
+  position: relative;
+  width: 100%; /* Por defecto, ocupa el 100% del ancho disponible */
+  max-width: none; /* Se ajustará dinámicamente en JS */
+  height: auto; /* Permite que la altura se ajuste dinámicamente */
+  margin: 0 auto; /* Centra el contenedor si es más pequeño que el área disponible */
+}
+
+.image-wrap iframe {
+  width: 100%; /* Ocupa todo el ancho del contenedor por defecto */
+  max-width: 100%; /* Se asegura de no exceder el tamaño del contenedor */
+  height: auto; /* Mantiene la proporción correctamente */
+  display: block; /* Elimina espacios debajo del iframe */
+  border: none; /* Sin bordes */
+}
+
 
 </style>
-

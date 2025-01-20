@@ -4,7 +4,7 @@ title: ctld
 permalink: /
 ---
 
-# Hi, I’m [Diego Cataldo](# "![Imagen 1](/assets/blogimages/tiles/cat.gif) ![Imagen 2](/assets/blogimages/me.jpg)"), a Uruguayan designer (he/him) based in Montevideo. My work is rooted in the fields of Art and Visual Culture, where software becomes a medium for exploration and expression.
+# Hi, I’m [Diego Cataldo](# "![Imagen 1](/assets/blogimages/me.jpg)"), a Uruguayan designer (he/him) based in Montevideo. My work is rooted in the fields of Art and Visual Culture, where software becomes a medium for exploration and expression.
 
 # I craft thoughtful product experiences through Graphic Design, UX, and Creative Development. My projects, spanning government sectors in Uruguay and the U.S., have earned international recognition at events like the Venice Architecture Biennale, the Ibero-American Design Biennial in Madrid, and the 30 Seconds Museum in [Hover aquí para ver imágenes](# "![Imagen 1](/assets/blogimages/tiles/wix.gif) ![Imagen 2](/assets/blogimages/cvuy-2.png) ![Imagen 3](/assets/blogimages/cvuy-3.png)") Tokyo.
 

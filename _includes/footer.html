@@ -209,5 +209,10 @@
       });
     });
   </script>
-  
-  
+
+<script>
+  document.querySelectorAll(".image-wrap").forEach((wrap) => {
+    const ratio = wrap.dataset.ratio ? eval(wrap.dataset.ratio) : 16 / 9; // Por defecto, 16:9
+    wrap.style.paddingBottom = `${(1 / ratio) * 100}%`;
+  });
+</script>

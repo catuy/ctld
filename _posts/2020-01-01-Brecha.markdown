@@ -1,26 +1,37 @@
 ---
 layout: post
 title:  "Rediseño Semanario Brecha"
-date:   2020-7-21 17:12:19 -0300
-description: "REBOOT: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
+date:   2024-12-8 17:12:19 -0300
+description: "Brecha: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos consultorias
-image: /assets/blogimages/tiles/brecha.gif
+images: /assets/blogimages/tiles/brecha.gif
 tags: [Web]
 ---
-Semanario Brecha es una publicación periodística independiente de izquierda fundada en 1985 en Montevideo, Uruguay. 
-Mi rol en este proyecto abarcó: consultoría general estratégica en UX, UI. Diseño, desarrollo e implementación del portal web. 
-Equipo de trabajo: Diego Cataldo, Carolina Ocampo y Lucía Stagnaro
 
-<video autobuffer autoPlay loop muted><source src="/assets/blogimages/brecha-1.mp4" type="video/mp4" /></video>
-# Otro Titulo
+<div class="row">
+<div class="column">
 Semanario Brecha es una publicación periodística independiente de izquierda fundada en 1985 en Montevideo, Uruguay. 
 Mi rol en este proyecto abarcó: consultoría general estratégica en UX, UI. Diseño, desarrollo e implementación del portal web. 
 Equipo de trabajo: Diego Cataldo, Carolina Ocampo y Lucía Stagnaro
-<video autobuffer autoPlay loop muted><source src="/assets/blogimages/brecha-2.mp4" type="video/mp4" /></video>
-Semanario Brecha es una publicación periodística independiente de izquierda fundada en 1985 en Montevideo, Uruguay. 
-Mi rol en este proyecto abarcó: consultoría general estratégica en UX, UI. Diseño, desarrollo e implementación del portal web. 
-Equipo de trabajo: Diego Cataldo, Carolina Ocampo y Lucía Stagnaro
-<video autobuffer autoPlay loop muted><source src="/assets/blogimages/brecha-3.mp4" type="video/mp4" /></video>
+</div>
+<div class="column">
+<iframe style="border: 0px solid rgba(0, 0, 0, 0.1);" width="720" height="480" src="https://embed.figma.com/proto/tfBPkAsZ7fkLFIt0xDdiKb/ctld---website?node-id=537-12151&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=537%3A12151&hotspot-hints=0&embed-host=share&hide-ui=1" allowfullscreen></iframe>
+<iframe style="border: 0px solid rgba(0, 0, 0, 0.1);" width="320" height="700" src="https://embed.figma.com/proto/tfBPkAsZ7fkLFIt0xDdiKb/ctld---website?node-id=582-12974&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=582%3A12974&hotspot-hints=0&show-proto-sidebar=1&embed-host=share&hide-ui=1" allowfullscreen></iframe>
+<iframe style="border: 0px solid rgba(0, 0, 0, 0.1);" width="720" height="480" src="https://embed.figma.com/proto/tfBPkAsZ7fkLFIt0xDdiKb/ctld---website?node-id=537-12431&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=537%3A12431&hotspot-hints=0&embed-host=share&hide-ui=1" allowfullscreen></iframe>
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="720" height="480" src="https://embed.figma.com/proto/tfBPkAsZ7fkLFIt0xDdiKb/ctld---website?node-id=537-12007&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=537%3A12007&hotspot-hints=0&show-proto-sidebar=1&embed-host=share&hide-ui=1" allowfullscreen></iframe>
+</div>
+</div>
 
-[Artículo sobre el rediseño](https://brecha.com.uy/otro-juego-es-posible/){:target="_blank"}
+<div class="row">
+<div class="column">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia metus felis, eu bibendum mauris condimentum vitae. Cras ultricies molestie odio, non volutpat mi imperdiet vel. Duis risus metus, feugiat sed lorem eu, vulputate eleifend tellus. Phasellus eget sapien non tellus rhoncus posuere ac eget erat.
+</div>
+<div class="column">
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="720" height="480" src="https://embed.figma.com/proto/tfBPkAsZ7fkLFIt0xDdiKb/ctld---website?node-id=537-10847&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=537%3A10847&hotspot-hints=0&show-proto-sidebar=1&embed-host=share&hide-ui=1" allowfullscreen></iframe>
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="720" height="480" src="https://embed.figma.com/proto/tfBPkAsZ7fkLFIt0xDdiKb/ctld---website?node-id=537-11305&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=537%3A11305&hotspot-hints=0&show-proto-sidebar=1&embed-host=share&hide-ui=1" allowfullscreen></iframe>
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="720" height="480" src="https://embed.figma.com/proto/tfBPkAsZ7fkLFIt0xDdiKb/ctld---website?node-id=537-11656&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=537%3A11656&hotspot-hints=0&show-proto-sidebar=1&embed-host=share&hide-ui=1" allowfullscreen></iframe>
+</div>
+</div>
+
+[Artículo sobre el rediseño](https://brecha.com.uy/otro-juego-es-posible/){:target="_blank"}<br>
 [Visitar sitio web](https://brecha.com.uy/){:target="_blank"}
