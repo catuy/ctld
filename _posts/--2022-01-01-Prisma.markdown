@@ -1,0 +1,21 @@
+---
+layout: post
+title:  "The Inter typeface"
+date:   2022-12-24 17:12:19 -0300
+description: "Prisma: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
+categories: todos consultorias
+images: /assets/blogimages/tiles/prisma.jpg
+tags: [Web]
+---
+
+<div class="row">
+<div class="column">
+PRISMA es un portal en el que podés acceder de manera dinámica y ágil a los indicadores nacionales más relevantes sobre Ciencia, Tecnología e Innovación. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia metus felis, eu bibendum mauris condimentum vitae. Cras ultricies molestie odio, non volutpat mi imperdiet vel. Duis risus metus, feugiat sed lorem eu, vulputate eleifend tellus. Phasellus eget sapien non tellus rhoncus posuere ac eget erat. 
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia metus felis, eu bibendum mauris condimentum vitae. Cras ultricies molestie odio, non volutpat mi imperdiet vel. Duis risus metus, feugiat sed lorem eu, vulputate eleifend tellus. Phasellus eget sapien non tellus rhoncus posuere ac eget erat.
+</div>
+<div class="column">
+<video autobuffer autoPlay loop muted><source src="/assets/blogimages/prisma-1.mp4" type="video/mp4" /></video>
+<video autobuffer autoPlay loop muted><source src="/assets/blogimages/prisma-2.mp4" type="video/mp4" /></video>
+</div>
+</div>

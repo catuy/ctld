@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "Trama.uy"
+date:   2020-03-21 17:12:19 -0300
+description: "TRAMA: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
+categories: todos consultorias
+images: /assets/blogimages/tiles/trama.jpg
+tags: [Web, Aplicación]
+---
+Trama is a digital platform designed to connect talent, entrepreneurs, researchers, business owners, and investors, facilitating collaboration to enhance research and innovation in Uruguay. In this project, my role focused on developing the design strategy, UX, UI, and overall product definition. The goal was to create an intuitive, user-friendly environment where stakeholders can easily share projects and experiences, promoting synergy and fostering growth in the national innovation ecosystem.
+
+<span class="text-sm">[Visitar sitio web](https://trama.uy/){:target="_blank"}</span>
+<video autobuffer autoPlay loop muted><source src="/assets/blogimages/trama-0.mp4" type="video/mp4" /></video>
+<video autobuffer autoPlay loop muted><source src="/assets/blogimages/trama-1.mp4" type="video/mp4" /></video>
+<video autobuffer autoPlay loop muted><source src="/assets/blogimages/trama-2.mp4" type="video/mp4" /></video>
+<video autobuffer autoPlay loop muted><source src="/assets/blogimages/trama-3.mp4" type="video/mp4" /></video>
+<video autobuffer autoPlay loop muted><source src="/assets/blogimages/trama-4.mp4" type="video/mp4" /></video>

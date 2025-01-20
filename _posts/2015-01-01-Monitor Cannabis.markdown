@@ -4,8 +4,9 @@ title:  "Monitor Cannabis"
 date:   2015-01-01 17:12:19 -0300
 description: "The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
 categories: todos consultorias
-image: /assets/blogimages/tiles/monitor.gif
+images: /assets/blogimages/tiles/monitor.gif
 tags: [Web]
+visible: false
 ---
 Monitorcannabis.uy es un componente del proyecto “Hacia una estrategia de evaluación y monitoreo de la regulación de la marihuana en Uruguay” gestionado por la Fundación Friedrich Ebert en Uruguay (FESUR) y financiado por Open Society Foundations . El proyecto cuenta con la colaboración de la Junta Nacional de Drogas, la Universidad de la República y ProDerechos. Busca facilitar el intercambio de información relevante sobre la implementación de la regulación del cannabis en Uruguay, su monitoreo y evaluación, entre actores nacionales, de otros países de la región y del mundo.
 

@@ -2,13 +2,27 @@
 layout: post
 title:  "SQ Factory"
 date:   2019-01-01 17:12:19 -0300
-description: "REBOOT: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
+description: "SQFACTORY: Lead Product Designer, optimizing UX and design systems to transform ideas into scalable solutions. Streamlined tools and led a rebranding to amplify client impact and efficiency."
 categories: todos consultorias
-image: /assets/blogimages/tiles/sq.jpg
+images: /assets/blogimages/tiles/sq.jpg
 tags: [Web]
+visible: false
 ---
+
+<div class="row">
+<div class="column">
+As Lead Product Designer at SQFACTORY, I improved the platform’s ability to turn ideas into scalable systems by enhancing its user experience and design system. My work streamlined tools like UI components and logic configuration, aligning with the platform’s goal of enabling clients to build value from day one.
+
+I also led a full rebranding effort, reinforcing SQFACTORY’s position as a fast, efficient solution for deploying custom applications and communication systems.
+</div>
+<div class="column">
 <video autobuffer autoPlay loop muted><source src="/assets/blogimages/sq-1.mp4" type="video/mp4" /></video>
 <video autobuffer autoPlay loop muted><source src="/assets/blogimages/sq-2.mp4" type="video/mp4" /></video>
 <img class="post-image-full" src="/assets/blogimages/sq-3.jpg">
 <img class="post-image-full" src="/assets/blogimages/sq-4.jpg">
+</div>
+</div>
+
+
+
 

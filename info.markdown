@@ -1,20 +1,17 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: Contact
+permalink: /contact/
 ---
-Diseñador cross-media, artista visual y docente. Vivo y hago en Montevideo, Uruguay.
 
-Licenciado en Diseño Gráfico por la Universidad ORT de Uruguay.
+<h1 class="page-heading">Contact</h1>
 
-Desde 2015 soy docente de Proyecto Final de Carrera en la Licenciatura de Diseño de Comunicación Visual de la Facultad de Arquitectura, Diseño y Urbanismo de la Universidad de la República de Uruguay.
+<!-- <img src="/assets/blogimages/me.jpg" alt="A photo of me" style="width: 300px;"> -->
 
-Mi área de actuación profesional se concentra principalmente en los medios digitales y su permanente transformación. Me especializo en proyectos de diseño basados en código que incluyen interfaces complejas, herramientas de diseño personalizadas, sistemas de diseño, así como herramientas experimentales de dibujo y animación. 
+# If you’ve made it this far, we likely share a vision for meaningful work. I’m drawn to projects with a clear purpose—those that make a positive impact and foster change. I believe in collaborating with teams committed to creating a fairer, more inclusive, and sustainable world.  
 
-He desarrollado proyectos para marcas internacionales como Coca-Cola, Bayer, Unilever, M-Audio, Avid, Wix, Prada, Gillette, Davidoff, Play Boy, Adidas, DHL, Versace, Chanel, Western Union, Philips; y locales como el Ministerio de Educación y Cultura, Latu, Uruguay XXI, Instituto Nacional de Logística, Ministerio de Industria, Energía y Minería, Intendencia de Montevideo, Inavi, Agencia Nacional de Investigación e Innovación y la Universidad Católica del Uruguay.
+# If these values resonate with you, I’d love to connect and explore how we can work together to make a difference.  
 
-Algunos de mis proyectos han sido premiados, publicados y exhibidos en más de 15 países, destacándose la participación en la XV Muestra Internacional de Arquitectura de la Bienal de Venecia, la Segunda Bienal Iberoamericana de Diseño de Madrid, la Cuarta Bienal de Tipografía Latinoamericana, la International Biennial Print Exhibit de Taiwán y el 30 seconds museum de Tokyo.
 
-CV completo [aquí](https://cv.fadu.edu.uy/mod/data/view.php?d=6&rid=557)
-
-Contacto en [cataldo.diego@gmail.com](mailto:cataldo.diego@gmail.com)
+# [Download my full CV](/assets/blogimages/resume.pdf)  
+# [Email](mailto:cataldo.diego@gmail.com)

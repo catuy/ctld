@@ -1,11 +1,12 @@
 ---
 layout: post
 title:  "Reboot: Dos leccionnes de arquitectura"
-date:   2016-01-01 17:12:19 -0300
-description: "REBOOT: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
+date:   2020-01-01 17:12:19 -0300
+description: "Reboot<br>I was part of the curatorial team representing <a href='https://artsandculture.google.com/partner/uruguay-biennale-architettura-2016' target='blank'>Uruguay at the 15th Venice Architecture Biennale.</a>"
 categories: todos academicos
-image: /assets/blogimages/tiles/reboot.jpg
+# images: /assets/blogimages/tiles/reboot.jpg
 tags: [Instalación]
+visible: true
 ---
 "REBOOT, 2 lecciones de arquitectura" es el concepto central que representa el Pabellón de Uruguay en la Bienal de Venecia 2016. Inaugurado el jueves 26 de mayo, el espacio está centrado en aquella arquitectura informal que es levantada por aquellos que "no tienen más herramientas para la construcción de su espacio vital que sus propios cuerpos y su instinto de supervivencia". Edificios que, según el equipo a cargo, funcionan como un reservorio de sentido para la arquitectura que hacemos hoy en día.
 

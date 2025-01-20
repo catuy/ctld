@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "Reboot: Dos leccionnes de arquitectura"
+date:   2022-01-01 17:12:19 -0300
+description: "Some of my silkscreen artworks have been selected for prestigious exhibitions, including the <a href='https://printbiennial.ntmofa.gov.tw/print20/en/finalist.aspx' target='blank'>International Biennial Print Exhibit</a> at the National Taiwan Museum of Fine Arts, the <a href='https://globalprintdouro.com/artists/diego.cataldo' target='blank'>5th Global Print</a> in Portugal, and the <a href='https://bienaldouro.com/artists/diego.cataldo/11' target='blank'>11th International Printmaking Biennial</a> Douro 2023."
+categories: todos academicos
+# images: /assets/blogimages/tiles/reboot.jpg
+tags: [Instalación]
+visible: true
+---

@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Rediseño Semanario Brecha"
-date:   2024-12-8 17:12:19 -0300
-description: "Brecha: The Inter typeface <br>Used by millions world-wide, including big names like Unity, Pixar, GitHub, Mozilla, Figma and many others."
+title:  "Brecha Weekly Redesign"
+date:   2022-12-8 17:12:19 -0300
+description: "Brecha<br>A seamless digital transformation, embracing a mobile-first experience and ensuring its bold, independent voice remains effortlessly accessible."
 categories: todos consultorias
 images: /assets/blogimages/tiles/brecha.gif
 tags: [Web]
@@ -10,9 +10,7 @@ tags: [Web]
 
 <div class="row">
 <div class="column">
-Semanario Brecha es una publicación periodística independiente de izquierda fundada en 1985 en Montevideo, Uruguay. 
-Mi rol en este proyecto abarcó: consultoría general estratégica en UX, UI. Diseño, desarrollo e implementación del portal web. 
-Equipo de trabajo: Diego Cataldo, Carolina Ocampo y Lucía Stagnaro
+This project involved a comprehensive redesign of the Brecha platform, focusing on optimizing accessibility and delivering a smoother user experience. The redesign simplified interfaces, improved content organization, and introduced a more modern aesthetic, all aimed at making it easier for users to find the information they need. As a result, the platform now offers a more intuitive and engaging navigation, fostering better interaction and efficiency for users.
 </div>
 <div class="column">
 <iframe style="border: 0px solid rgba(0, 0, 0, 0.1);" width="720" height="480" src="https://embed.figma.com/proto/tfBPkAsZ7fkLFIt0xDdiKb/ctld---website?node-id=537-12151&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=537%3A12151&hotspot-hints=0&embed-host=share&hide-ui=1" allowfullscreen></iframe>
@@ -24,7 +22,7 @@ Equipo de trabajo: Diego Cataldo, Carolina Ocampo y Lucía Stagnaro
 
 <div class="row">
 <div class="column">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia metus felis, eu bibendum mauris condimentum vitae. Cras ultricies molestie odio, non volutpat mi imperdiet vel. Duis risus metus, feugiat sed lorem eu, vulputate eleifend tellus. Phasellus eget sapien non tellus rhoncus posuere ac eget erat.
+By optimizing for mobile, we significantly improved user retention, resulting in longer session durations and a reduced bounce rate. This responsive design made navigating the site smoother, allowing readers to engage more deeply with content, while ensuring seamless access across various devices, particularly smartphones. The update led to increased time on site and lower exit rates, confirming the design's success in engaging a mobile-dominant audience.
 </div>
 <div class="column">
 <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="720" height="480" src="https://embed.figma.com/proto/tfBPkAsZ7fkLFIt0xDdiKb/ctld---website?node-id=537-10847&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=537%3A10847&hotspot-hints=0&show-proto-sidebar=1&embed-host=share&hide-ui=1" allowfullscreen></iframe>
@@ -33,5 +31,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia metus 
 </div>
 </div>
 
-[Artículo sobre el rediseño](https://brecha.com.uy/otro-juego-es-posible/){:target="_blank"}<br>
-[Visitar sitio web](https://brecha.com.uy/){:target="_blank"}
+[Article about redesign (Spanish)](https://brecha.com.uy/otro-juego-es-posible/){:target="_blank"}<br>
+[Website](https://brecha.com.uy/){:target="_blank"}
