@@ -47,7 +47,6 @@ One of the most impactful applications of our design standards was the redesign 
 </div>
 <div class="column">
 <img class="post-image-full" src="/assets/blogimages/bi1.png">
-<img class="post-image-full" src="/assets/blogimages/bi2.png">
 </div>
 </div>
 
