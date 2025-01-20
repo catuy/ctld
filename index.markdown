@@ -4,7 +4,7 @@ title: ctld
 permalink: /
 ---
 
-# Hi, I’m [Diego Cataldo](# "![Imagen 1](/assets/blogimages/me.jpg)"). I’m a Uruguayan he/him living in Montevideo, Uruguay. Design and code are the mediums through which I express myself.
+# Hi, I’m [Diego Cataldo](# "![Imagen 1](/assets/blogimages/me.jpg)"). I’m a Uruguayan he/him living in Montevideo, Uruguay. Visuals and code are the mediums through which I express myself.
 
 # You can call me a Designer if you want, but I see myself as something more fluid—a hybrid of creator, strategist, and builder. My journey began with graphic design, morphed into crafting physical interfaces for musical instruments, and led me to code my way into digital experiences.
 
