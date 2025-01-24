@@ -1,9 +1,9 @@
 const root = document.documentElement;
 
 // Definir colores
-root.style.setProperty('--color-primary', '#ff0000');
+root.style.setProperty('--color-primary', '#EB0000');
 root.style.setProperty('--second-color', '#ffffff');
-const background_color = '#ff0000';
+const background_color = '#EB0000';
 
 // Crear el favicon dinámicamente
 function createFavicon(color) {
