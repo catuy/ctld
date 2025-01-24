@@ -83,7 +83,7 @@ If these values resonate with you, I’d love to connect and explore how we can 
 This site serves as my portfolio and personal resume, showcasing my work as a designer. It is built primarily in HTML and Markdown, preprocessed by Jekyll, and hosted globally via GitHub. You can find it and fork it for your own use on my <a href="https://github.com/catuy" target="_blank">GitHub profile</a>.
 </p>
 <p>
-It uses the <a href="https://www.ibm.com/plex/" target="_blank">IBM Plex</a> typeface and meets the highest ADA accessibility standards, including WCAG 2.1 AA compliance, ensuring compatibility with screen readers, proper color contrast ratios, and keyboard navigability.
+It uses the <a href="https://www.ibm.com/plex/" target="_blank">IBM Plex</a> typeface and meets ADA accessibility standards, including WCAG 2.1 AA compliance, ensuring compatibility with screen readers, proper color contrast ratios, and keyboard navigability.
 </p>
 </div>
 <div class="column">
