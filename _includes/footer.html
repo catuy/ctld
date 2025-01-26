@@ -68,146 +68,154 @@
   </script> -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const initializeHoverEffect = (elements, extractImagesCallback) => {
-        elements.forEach(element => {
-          const imagesData = extractImagesCallback(element);
-          if (!imagesData) return;
-  
-          const imageWrappers = imagesData.map(data => {
-            const url = data.match(/\((.*?)\)/)?.[1] || data;
-  
-            const wrapper = document.createElement('div');
-            wrapper.classList.add('image-wrapper');
-            wrapper.style.display = 'none';
-            wrapper.style.position = 'fixed'; // Asegura que la imagen se mantenga fija en la pantalla
-            wrapper.style.border = '1px solid var(--color-primary)';
-            wrapper.style.borderRadius = '8px';
-            wrapper.style.overflow = 'hidden';
-            wrapper.style.zIndex = '1000';
-            document.body.appendChild(wrapper);
-  
-            const navBar = document.createElement('div');
-            navBar.style.background = '#fff';
-            navBar.style.borderBottom = '1px solid var(--color-primary)';
-            navBar.style.height = '30px';
-            navBar.style.display = 'flex';
-            navBar.style.alignItems = 'center';
-            navBar.style.padding = '0 8px';
-            navBar.style.boxSizing = 'border-box';
-  
-            ['#fff', '#fff', '#fff'].forEach(color => {
-              const circle = document.createElement('span');
-              circle.style.width = '8px';
-              circle.style.height = '8px';
-              circle.style.backgroundColor = color;
-              circle.style.borderRadius = '50%';
-              circle.style.marginRight = '6px';
-              circle.style.border = '1px solid var(--color-primary)';
-              navBar.appendChild(circle);
-            });
-  
-            const img = document.createElement('img');
-            img.src = url;
-            img.style.objectFit = 'contain';
-  
-            img.onload = () => {
-              const isLandscape = img.naturalWidth > img.naturalHeight;
-              if (isLandscape) {
-                wrapper.style.width = '40%';
-                wrapper.style.height = 'auto';
-              } else {
-                wrapper.style.width = 'auto';
-                wrapper.style.height = '50%';
-              }
-              img.style.width = '100%';
-              img.style.height = 'calc(100% - 30px)';
-            };
-  
-            wrapper.appendChild(navBar);
-            wrapper.appendChild(img);
-  
-            return wrapper;
-          });
-  
-          let lastImageIndex = 0;
-          let lastMouseX = 0;
-          let lastMouseY = 0;
-          const threshold = 20;
-  
-          const showNextImage = () => {
-            imageWrappers.forEach(wrapper => (wrapper.style.display = 'none'));
-            lastImageIndex = (lastImageIndex + 1) % imageWrappers.length;
-            imageWrappers[lastImageIndex].style.display = 'block';
-          };
-  
-          element.addEventListener('mouseenter', () => {
-            lastMouseX = 0;
-            lastMouseY = 0;
-  
-            if (imageWrappers.length > 0) {
-              imageWrappers[lastImageIndex].style.display = 'block';
-            }
-  
-            element.addEventListener('mouseleave', () => {
-              imageWrappers.forEach(wrapper => (wrapper.style.display = 'none'));
-              lastImageIndex = 0;
-            });
-          });
-  
-          element.addEventListener('mousemove', event => {
-            const deltaX = Math.abs(event.pageX - lastMouseX);
-            const deltaY = Math.abs(event.pageY - lastMouseY);
-  
-            if (deltaX > threshold || deltaY > threshold) {
-              showNextImage();
-              lastMouseX = event.pageX;
-              lastMouseY = event.pageY;
-            }
-  
-            imageWrappers.forEach(wrapper => {
-              let left = event.pageX + 10;
-              let top = event.pageY + 10;
-  
-              // Ajustar la posición vertical para que no se vea afectada por el scroll
-              top = event.pageY - window.scrollY + 10;
-  
-              const screenCenterX = window.innerWidth / 2;
-              const screenCenterY = window.innerHeight / 2;
-  
-              if (event.pageX > screenCenterX) {
-                left = event.pageX - wrapper.offsetWidth - 10;
-              }
-  
-              if (event.pageY > screenCenterY) {
-                top = event.pageY - window.scrollY - wrapper.offsetHeight - 10;
-              }
-  
-              if (left + wrapper.offsetWidth > window.innerWidth) {
-                left = window.innerWidth - wrapper.offsetWidth - 10;
-              }
-              if (top + wrapper.offsetHeight > window.innerHeight) {
-                top = window.innerHeight - wrapper.offsetHeight - 10;
-              }
-              if (left < 10) left = 10;
-              if (top < 10) top = 10;
-  
-              wrapper.style.left = `${left}px`;
-              wrapper.style.top = `${top}px`;
-            });
-          });
+  // Función para detectar si es un dispositivo móvil
+  const isMobile = () => window.innerWidth <= 768 || 'ontouchstart' in window;
+
+  // Si es móvil, no ejecuta el script
+  if (isMobile()) {
+    return;
+  }
+
+  const initializeHoverEffect = (elements, extractImagesCallback) => {
+    elements.forEach(element => {
+      const imagesData = extractImagesCallback(element);
+      if (!imagesData) return;
+
+      const imageWrappers = imagesData.map(data => {
+        const url = data.match(/\((.*?)\)/)?.[1] || data;
+
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('image-wrapper');
+        wrapper.style.display = 'none';
+        wrapper.style.position = 'fixed'; // Asegura que la imagen se mantenga fija en la pantalla
+        wrapper.style.border = '1px solid var(--color-primary)';
+        wrapper.style.borderRadius = '8px';
+        wrapper.style.overflow = 'hidden';
+        wrapper.style.zIndex = '1000';
+        document.body.appendChild(wrapper);
+
+        const navBar = document.createElement('div');
+        navBar.style.background = '#fff';
+        navBar.style.borderBottom = '1px solid var(--color-primary)';
+        navBar.style.height = '30px';
+        navBar.style.display = 'flex';
+        navBar.style.alignItems = 'center';
+        navBar.style.padding = '0 8px';
+        navBar.style.boxSizing = 'border-box';
+
+        ['#fff', '#fff', '#fff'].forEach(color => {
+          const circle = document.createElement('span');
+          circle.style.width = '8px';
+          circle.style.height = '8px';
+          circle.style.backgroundColor = color;
+          circle.style.borderRadius = '50%';
+          circle.style.marginRight = '6px';
+          circle.style.border = '1px solid var(--color-primary)';
+          navBar.appendChild(circle);
         });
-      };
-  
-      // Inicializar el efecto en los enlaces con imágenes en el atributo title
-      initializeHoverEffect(document.querySelectorAll('.main-content a'), link => {
-        return link.title.match(/!\[.*?\]\((.*?)\)/g);
+
+        const img = document.createElement('img');
+        img.src = url;
+        img.style.objectFit = 'contain';
+
+        img.onload = () => {
+          const isLandscape = img.naturalWidth > img.naturalHeight;
+          if (isLandscape) {
+            wrapper.style.width = '40%';
+            wrapper.style.height = 'auto';
+          } else {
+            wrapper.style.width = 'auto';
+            wrapper.style.height = '50%';
+          }
+          img.style.width = '100%';
+          img.style.height = 'calc(100% - 30px)';
+        };
+
+        wrapper.appendChild(navBar);
+        wrapper.appendChild(img);
+
+        return wrapper;
       });
-  
-      // Inicializar el efecto en las imágenes destacadas
-      initializeHoverEffect(document.querySelectorAll('.post-image'), img => {
-        return [img.src]; // Usar directamente el atributo src de la imagen
+
+      let lastImageIndex = 0;
+      let lastMouseX = 0;
+      let lastMouseY = 0;
+      const threshold = 20;
+
+      const showNextImage = () => {
+        imageWrappers.forEach(wrapper => (wrapper.style.display = 'none'));
+        lastImageIndex = (lastImageIndex + 1) % imageWrappers.length;
+        imageWrappers[lastImageIndex].style.display = 'block';
+      };
+
+      element.addEventListener('mouseenter', () => {
+        lastMouseX = 0;
+        lastMouseY = 0;
+
+        if (imageWrappers.length > 0) {
+          imageWrappers[lastImageIndex].style.display = 'block';
+        }
+
+        element.addEventListener('mouseleave', () => {
+          imageWrappers.forEach(wrapper => (wrapper.style.display = 'none'));
+          lastImageIndex = 0;
+        });
+      });
+
+      element.addEventListener('mousemove', event => {
+        const deltaX = Math.abs(event.pageX - lastMouseX);
+        const deltaY = Math.abs(event.pageY - lastMouseY);
+
+        if (deltaX > threshold || deltaY > threshold) {
+          showNextImage();
+          lastMouseX = event.pageX;
+          lastMouseY = event.pageY;
+        }
+
+        imageWrappers.forEach(wrapper => {
+          let left = event.pageX + 10;
+          let top = event.pageY + 10;
+
+          top = event.pageY - window.scrollY + 10;
+
+          const screenCenterX = window.innerWidth / 2;
+          const screenCenterY = window.innerHeight / 2;
+
+          if (event.pageX > screenCenterX) {
+            left = event.pageX - wrapper.offsetWidth - 10;
+          }
+
+          if (event.pageY > screenCenterY) {
+            top = event.pageY - window.scrollY - wrapper.offsetHeight - 10;
+          }
+
+          if (left + wrapper.offsetWidth > window.innerWidth) {
+            left = window.innerWidth - wrapper.offsetWidth - 10;
+          }
+          if (top + wrapper.offsetHeight > window.innerHeight) {
+            top = window.innerHeight - wrapper.offsetHeight - 10;
+          }
+          if (left < 10) left = 10;
+          if (top < 10) top = 10;
+
+          wrapper.style.left = `${left}px`;
+          wrapper.style.top = `${top}px`;
+        });
       });
     });
+  };
+
+  // Inicializar el efecto en los enlaces con imágenes en el atributo title
+  initializeHoverEffect(document.querySelectorAll('.main-content a'), link => {
+    return link.title.match(/!\[.*?\]\((.*?)\)/g);
+  });
+
+  // Inicializar el efecto en las imágenes destacadas
+  initializeHoverEffect(document.querySelectorAll('.post-image'), img => {
+    return [img.src]; // Usar directamente el atributo src de la imagen
+  });
+});
+
   </script>
 
 <script>
