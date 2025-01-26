@@ -303,6 +303,17 @@ footer{
 }
 
 @media only screen and (max-width: 768px) {
+
+  :root {
+    --color-primary: #ffffff;
+    --color-secondary: #ffffff;
+    --color-tertiary: #ffffff;
+    --font-size-s: 12px;
+    --font-size-m: 15px;
+    --font-size-l: 18px;
+    --margin: 20px;
+    --margin-top: 40px;
+  }
   .container {
     flex-direction: column;
     display: flex;

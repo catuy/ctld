@@ -76,7 +76,7 @@ If these values resonate with you, I’d love to connect and explore how we can 
 
 
 
-<h1 class="page-heading" style="margin-top:calc(var(--margin-top)*2)">This website</h1>
+<h1 class="page-heading" style="margin-top:calc(var(--margin-top)*2);float:left">This website</h1>
 <div class="row">
 <div class="column">
 <p>
