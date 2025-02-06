@@ -1,0 +1,11 @@
+body {
+    margin: 0 0 auto;
+    overflow: hidden;
+}
+
+canvas#defaultCanvas0 {
+    max-height: 100vh;
+    max-width: 100vw;
+    overflow: hidden;
+    position: fixed;
+}
