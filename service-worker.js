@@ -1,8 +1,7 @@
-const CACHE_NAME = 'p5js-pwa-v1';
+const CACHE_NAME = 'ctld';
 const ASSETS = [
   '/',
   '/index.html',
-  '/sketch.js',
   '/styles.css',
   '/manifest.json'
 ];
