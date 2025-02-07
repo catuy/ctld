@@ -15,6 +15,7 @@ let colors = [
 let walkerX, walkerY; // Posición del walker
 let walkerAngle; // Ángulo de dirección del walker
 let walkerSpeed = 1; // Velocidad del walker (en celdas por fotograma)
+let colorIndex = 0; // Índice para la animación del ícono del menú
 
 function setup() {
   createCanvas(windowWidth, windowHeight); // Lienzo del tamaño de la ventana
@@ -36,6 +37,9 @@ function draw() {
       rect(gridX, gridY, cellSize, cellSize); // Dibuja un cuadrado en la celda correspondiente
     }
   }
+
+  // Animación del ícono del menú
+  animateMenuIcon();
 }
 
 function drawGrid() {
@@ -72,13 +76,34 @@ function drawWalker() {
 }
 
 function createUI() {
-  // Botón de menú hamburguesa (círculo rojo)
+  // Contenedor para los botones del menú
+  let menuContainer = createDiv();
+  menuContainer.id('menuContainer');
+  menuContainer.style('position', 'fixed');
+  menuContainer.style('top', '10px');
+  menuContainer.style('left', '10px');
+  menuContainer.style('display', 'flex');
+  menuContainer.style('align-items', 'center');
+  menuContainer.style('gap', '10px');
+
+  // Botón de "go back" (flecha izquierda)
+  let backButton = createButton('←');
+  backButton.parent(menuContainer);
+  backButton.style('font-size', '24px');
+  backButton.style('border', 'none');
+  backButton.style('background', 'none');
+  backButton.style('color', '#000');
+  backButton.mousePressed(() => {
+    // Aquí puedes agregar la funcionalidad de "go back" si es necesario
+  });
+
+  // Botón de menú (círculo animado)
   let menuButton = createButton('●');
-  menuButton.position(10, 10);
+  menuButton.parent(menuContainer);
+  menuButton.id('menuButton');
   menuButton.style('font-size', '24px');
   menuButton.style('border', 'none');
   menuButton.style('background', 'none');
-  menuButton.style('color', '#FF0000');
   menuButton.mousePressed(() => {
     isMenuOpen = !isMenuOpen; // Alternar estado del menú
     document.getElementById('menuModal').style.display = isMenuOpen ? 'block' : 'none';
@@ -198,6 +223,17 @@ function exportHighResImage() {
 
   // Guardar la imagen
   saveCanvas(highResCanvas, 'pixelArt', 'png');
+}
+
+// Animación del ícono del menú
+function animateMenuIcon() {
+  if (frameCount % 5 === 0) { // Cambia el color cada 5 fotogramas
+    colorIndex = (colorIndex + 1) % colors.length;
+    let menuButton = document.getElementById('menuButton');
+    if (menuButton) {
+      menuButton.style.color = colors[colorIndex].value;
+    }
+  }
 }
 
 // Evitar que el canvas gire en dispositivos móviles
