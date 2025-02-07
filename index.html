@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ctld</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <ul>
+    <a href="2025/001/index.html"><li style="background-image: url(tiles/001.png);"><span>001</span></li></a>
+    <a href="2025/001/index.html"><li style="background-image: url(tiles/001.png);"><span>001</span></li></a>
+  </ul>
+  <script>
+    // Registrar el Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then((registration) => {
+          console.log('Service Worker registrado con éxito:', registration);
+        })
+        .catch((error) => {
+          console.log('Error al registrar el Service Worker:', error);
+        });
+    }
+  </script>
+</body>
+</html>
