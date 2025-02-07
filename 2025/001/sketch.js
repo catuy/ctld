@@ -4,6 +4,8 @@ let isMenuOpen = false; // Estado del menú
 let isWalkerActive = false; // Estado del dibujo automático
 let colors = [0, '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF']; // Lista de colores
 let walkerX, walkerY; // Posición del walker
+let walkerAngle; // Ángulo de dirección del walker
+let walkerSpeed = 1; // Velocidad del walker (en celdas por fotograma)
 
 function setup() {
   createCanvas(windowWidth, windowHeight); // Lienzo del tamaño de la ventana
@@ -41,13 +43,23 @@ function drawWalker() {
   fill(currentColor); // Usa el color actual
   rect(walkerX, walkerY, cellSize, cellSize); // Dibuja un cuadrado en la posición del walker
 
-  // Mueve el walker aleatoriamente
-  walkerX += floor(random(-1, 2)) * cellSize;
-  walkerY += floor(random(-1, 2)) * cellSize;
+  // Calcula la nueva posición basada en el ángulo
+  let newX = walkerX + cos(walkerAngle) * cellSize * walkerSpeed;
+  let newY = walkerY + sin(walkerAngle) * cellSize * walkerSpeed;
 
-  // Limita el walker dentro del lienzo
-  walkerX = constrain(walkerX, 0, width - cellSize);
-  walkerY = constrain(walkerY, 0, height - cellSize);
+  // Si el walker se sale del lienzo, cambia de dirección
+  if (newX < 0 || newX >= width || newY < 0 || newY >= height) {
+    walkerAngle = random(TWO_PI); // Cambia a un ángulo aleatorio
+    newX = constrain(newX, 0, width - cellSize); // Limita la posición X
+    newY = constrain(newY, 0, height - cellSize); // Limita la posición Y
+  }
+
+  // Actualiza la posición del walker
+  walkerX = newX;
+  walkerY = newY;
+
+  // Gira ligeramente el walker para un movimiento más natural
+  walkerAngle += random(-0.2, 0.2); // Pequeñas variaciones en el ángulo
 }
 
 function createUI() {
@@ -123,6 +135,7 @@ function createUI() {
     if (isWalkerActive) {
       walkerX = floor(random(width / cellSize)) * cellSize; // Posición inicial aleatoria
       walkerY = floor(random(height / cellSize)) * cellSize;
+      walkerAngle = random(TWO_PI); // Ángulo inicial aleatorio
     }
   });
 
