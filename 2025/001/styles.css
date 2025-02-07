@@ -43,3 +43,11 @@ div#menuModal {
     color: white;
     margin-bottom: 10px !important;!I;!;
 }
+
+button#menuButton {
+    height: 48px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    line-height: 1px;
+    top: -14px !important;
+}

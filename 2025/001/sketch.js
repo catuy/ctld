@@ -1,9 +1,9 @@
 let cellSize = 10; // Tamaño de cada celda de la grilla
-let currentColor = 0; // Color actual (negro por defecto)
+let currentColor = '#000000'; // Color actual (negro por defecto)
 let isMenuOpen = false; // Estado del menú
 let isWalkerActive = false; // Estado del dibujo automático
 let colors = [
-  { name: "Negro", value: 0 },
+  { name: "Negro", value: '#000000' },
   { name: "Rojo", value: '#FF0000' },
   { name: "Verde", value: '#00FF00' },
   { name: "Azul", value: '#0000FF' },
@@ -16,6 +16,7 @@ let walkerX, walkerY; // Posición del walker
 let walkerAngle; // Ángulo de dirección del walker
 let walkerSpeed = 1; // Velocidad del walker (en celdas por fotograma)
 let colorIndex = 0; // Índice para la animación del ícono del menú
+let margin = 1; // Margen de una unidad de la grilla
 
 function setup() {
   createCanvas(windowWidth, windowHeight); // Lienzo del tamaño de la ventana
@@ -34,7 +35,16 @@ function draw() {
       fill(currentColor); // Usa el color actual
       let gridX = floor(mouseX / cellSize) * cellSize; // Calcula la posición X en la grilla
       let gridY = floor(mouseY / cellSize) * cellSize; // Calcula la posición Y en la grilla
-      rect(gridX, gridY, cellSize, cellSize); // Dibuja un cuadrado en la celda correspondiente
+
+      // Aplicar margen
+      if (
+        gridX >= cellSize * margin &&
+        gridX <= width - cellSize * (margin + 1) &&
+        gridY >= cellSize * margin &&
+        gridY <= height - cellSize * (margin + 1)
+      ) {
+        rect(gridX, gridY, cellSize, cellSize); // Dibuja un cuadrado en la celda correspondiente
+      }
     }
   }
 
@@ -61,10 +71,15 @@ function drawWalker() {
   let newY = walkerY + sin(walkerAngle) * cellSize * walkerSpeed;
 
   // Si el walker se sale del lienzo, cambia de dirección
-  if (newX < 0 || newX >= width || newY < 0 || newY >= height) {
+  if (
+    newX < cellSize * margin ||
+    newX >= width - cellSize * (margin + 1) ||
+    newY < cellSize * margin ||
+    newY >= height - cellSize * (margin + 1)
+  ) {
     walkerAngle = random(TWO_PI); // Cambia a un ángulo aleatorio
-    newX = constrain(newX, 0, width - cellSize); // Limita la posición X
-    newY = constrain(newY, 0, height - cellSize); // Limita la posición Y
+    newX = constrain(newX, cellSize * margin, width - cellSize * (margin + 1)); // Limita la posición X
+    newY = constrain(newY, cellSize * margin, height - cellSize * (margin + 1)); // Limita la posición Y
   }
 
   // Actualiza la posición del walker
@@ -76,34 +91,15 @@ function drawWalker() {
 }
 
 function createUI() {
-  // Contenedor para los botones del menú
-  let menuContainer = createDiv();
-  menuContainer.id('menuContainer');
-  menuContainer.style('position', 'fixed');
-  menuContainer.style('top', '10px');
-  menuContainer.style('left', '10px');
-  menuContainer.style('display', 'flex');
-  menuContainer.style('align-items', 'center');
-  menuContainer.style('gap', '10px');
-
-  // Botón de "go back" (flecha izquierda)
-  let backButton = createButton('←');
-  backButton.parent(menuContainer);
-  backButton.style('font-size', '24px');
-  backButton.style('border', 'none');
-  backButton.style('background', 'none');
-  backButton.style('color', '#000');
-  backButton.mousePressed(() => {
-    // Aquí puedes agregar la funcionalidad de "go back" si es necesario
-  });
-
-  // Botón de menú (círculo animado)
-  let menuButton = createButton('●');
-  menuButton.parent(menuContainer);
+  // Botón de menú (cuadrado animado)
+  let menuButton = createButton('■');
+  menuButton.position(0, 0); // Pegado al borde superior izquierdo
   menuButton.id('menuButton');
-  menuButton.style('font-size', '24px');
+  menuButton.style('font-size', '48px'); // Tamaño más grande (x2)
   menuButton.style('border', 'none');
   menuButton.style('background', 'none');
+  menuButton.style('color', '#FF0000');
+  menuButton.style('padding', '0');
   menuButton.mousePressed(() => {
     isMenuOpen = !isMenuOpen; // Alternar estado del menú
     document.getElementById('menuModal').style.display = isMenuOpen ? 'block' : 'none';
@@ -211,8 +207,8 @@ function exportHighResImage() {
   highResCanvas.noStroke();
 
   // Dibujar la grilla en alta definición
-  for (let x = 0; x < width; x += cellSize) {
-    for (let y = 0; y < height; y += cellSize) {
+  for (let x = cellSize * margin; x < width - cellSize * margin; x += cellSize) {
+    for (let y = cellSize * margin; y < height - cellSize * margin; y += cellSize) {
       let pixelColor = get(x + cellSize / 2, y + cellSize / 2); // Obtener el color del píxel central
       if (pixelColor[0] !== 255 || pixelColor[1] !== 255 || pixelColor[2] !== 255) {
         highResCanvas.fill(pixelColor);
