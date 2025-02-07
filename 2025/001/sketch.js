@@ -2,7 +2,16 @@ let cellSize = 10; // Tamaño de cada celda de la grilla
 let currentColor = 0; // Color actual (negro por defecto)
 let isMenuOpen = false; // Estado del menú
 let isWalkerActive = false; // Estado del dibujo automático
-let colors = [0, '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF']; // Lista de colores
+let colors = [
+  { name: "Negro", value: 0 },
+  { name: "Rojo", value: '#FF0000' },
+  { name: "Verde", value: '#00FF00' },
+  { name: "Azul", value: '#0000FF' },
+  { name: "Amarillo", value: '#FFFF00' },
+  { name: "Magenta", value: '#FF00FF' },
+  { name: "Cian", value: '#00FFFF' },
+  { name: "Blanco", value: '#FFFFFF' } // Color blanco para borrar
+];
 let walkerX, walkerY; // Posición del walker
 let walkerAngle; // Ángulo de dirección del walker
 let walkerSpeed = 1; // Velocidad del walker (en celdas por fotograma)
@@ -63,12 +72,13 @@ function drawWalker() {
 }
 
 function createUI() {
-  // Botón de menú hamburguesa
-  let menuButton = createButton('☰');
+  // Botón de menú hamburguesa (círculo rojo)
+  let menuButton = createButton('●');
   menuButton.position(10, 10);
   menuButton.style('font-size', '24px');
   menuButton.style('border', 'none');
   menuButton.style('background', 'none');
+  menuButton.style('color', '#FF0000');
   menuButton.mousePressed(() => {
     isMenuOpen = !isMenuOpen; // Alternar estado del menú
     document.getElementById('menuModal').style.display = isMenuOpen ? 'block' : 'none';
@@ -117,8 +127,8 @@ function createUI() {
   colorSelect.parent(modal);
   colorSelect.style('display', 'block');
   colorSelect.style('margin-bottom', '20px');
-  colors.forEach((color, index) => {
-    colorSelect.option(`Color ${index + 1}`, color);
+  colors.forEach((color) => {
+    colorSelect.option(color.name, color.value);
   });
   colorSelect.changed(() => {
     currentColor = colorSelect.value(); // Actualizar color actual
@@ -137,6 +147,16 @@ function createUI() {
       walkerY = floor(random(height / cellSize)) * cellSize;
       walkerAngle = random(TWO_PI); // Ángulo inicial aleatorio
     }
+  });
+
+  // Botón para borrar el canvas
+  let clearButton = createButton('Borrar Canvas');
+  clearButton.parent(modal);
+  clearButton.style('display', 'block');
+  clearButton.style('margin-bottom', '20px');
+  clearButton.mousePressed(() => {
+    background(255); // Limpiar el fondo
+    drawGrid(); // Redibujar la grilla
   });
 
   // Botón para exportar en alta definición
@@ -178,4 +198,10 @@ function exportHighResImage() {
 
   // Guardar la imagen
   saveCanvas(highResCanvas, 'pixelArt', 'png');
+}
+
+// Evitar que el canvas gire en dispositivos móviles
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  drawGrid();
 }
