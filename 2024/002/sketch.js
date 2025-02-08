@@ -4,7 +4,7 @@ function setup() {
   createCanvas(displayWidth, displayHeight);
   let fill_color = color('#312783');
   let stroke_color = color('#E6007E');
-  let background_color = color('#eee');
+  let background_color = color('#fff');
   let stroke_wight = 0;
   dim = width/2;
   colorMode(HSB, 360, 100, 100);

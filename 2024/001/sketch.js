@@ -9,7 +9,7 @@ function setup() {
   createCanvas(displayWidth, displayHeight, SVG);
   let fill_color = color('#2b2378');
   let stroke_color = color('#d90073');
-  let background_color = color('#e2e2e2e2');
+  let background_color = color('#fff');
   let stroke_wight = 1.4;
 
 // slider test ( change from inside canvas to its own position below canvas
@@ -34,8 +34,8 @@ if ( usectrlpos ) {
 }
 
 function touchMoved() {
-  let object_width = 150;
-  let object_height = 150;
+  let object_width = 50;
+  let object_height = 50;
   get_slider();
   // background(r,g,b);
   // fill(b,r,g);
