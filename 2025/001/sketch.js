@@ -19,6 +19,7 @@ let walkerSpeed = 1; // Velocidad del walker (en celdas por fotograma)
 let colorIndex = 0; // Índice para la animación del ícono del menú
 let margin = 1; // Margen de una unidad de la grilla
 
+
 function setup() {
   createCanvas(windowWidth, windowHeight); // Lienzo del tamaño de la ventana
   background(255); // Fondo blanco
