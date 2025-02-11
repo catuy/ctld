@@ -17,14 +17,14 @@ ul {
     list-style: none;
 }
 ul li{
-    height: 25vh;
+    height: 33vh;
     width: 100vw;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 ul li span{
-    height: 25vh;
+    height: 33vh;
     width: 100vw;
     /* padding: 20px; */
     font-size: 18px;
@@ -41,7 +41,7 @@ a:hover{
 /* Breakpoint para pantallas mayores a 768px (escritorio) */
 @media screen and (min-width: 768px) {
     ul li{
-        height: 25vh;
+        height: 33vh;
         width: 25vw;
         background-size: contain;
         background-repeat: no-repeat;

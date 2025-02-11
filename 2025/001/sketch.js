@@ -1,4 +1,5 @@
-let cellSize = 10; // Tamaño de cada celda de la grilla
+let cellWidth = 10; // Ancho de cada celda de la grilla
+let cellHeight = 10; // Alto de cada celda de la grilla
 let currentColor = '#000000'; // Color actual (negro por defecto)
 let isMenuOpen = false; // Estado del menú
 let isWalkerActive = false; // Estado del dibujo automático
@@ -33,17 +34,17 @@ function draw() {
       drawWalker(); // Dibuja automáticamente
     } else {
       fill(currentColor); // Usa el color actual
-      let gridX = floor(mouseX / cellSize) * cellSize; // Calcula la posición X en la grilla
-      let gridY = floor(mouseY / cellSize) * cellSize; // Calcula la posición Y en la grilla
+      let gridX = floor(mouseX / cellWidth) * cellWidth; // Calcula la posición X en la grilla
+      let gridY = floor(mouseY / cellHeight) * cellHeight; // Calcula la posición Y en la grilla
 
       // Aplicar margen
       if (
-        gridX >= cellSize * margin &&
-        gridX <= width - cellSize * (margin + 1) &&
-        gridY >= cellSize * margin &&
-        gridY <= height - cellSize * (margin + 1)
+        gridX >= cellWidth * margin &&
+        gridX <= width - cellWidth * (margin + 1) &&
+        gridY >= cellHeight * margin &&
+        gridY <= height - cellHeight * (margin + 1)
       ) {
-        rect(gridX, gridY, cellSize, cellSize); // Dibuja un cuadrado en la celda correspondiente
+        rect(gridX, gridY, cellWidth, cellHeight); // Dibuja un cuadrado en la celda correspondiente
       }
     }
   }
@@ -53,33 +54,34 @@ function draw() {
 }
 
 function drawGrid() {
-  // Dibuja la grilla
-  for (let x = 0; x < width; x += cellSize) {
-    for (let y = 0; y < height; y += cellSize) {
+  // Dibuja la grilla sin borrar el contenido existente
+  for (let x = 0; x < width; x += cellWidth) {
+    for (let y = 0; y < height; y += cellHeight) {
       noFill(); // Sin relleno
-      rect(x, y, cellSize, cellSize); // Dibuja cada celda de la grilla
+      // stroke(200); // Color de la línea de la grilla
+      rect(x, y, cellWidth, cellHeight); // Dibuja cada celda de la grilla
     }
   }
 }
 
 function drawWalker() {
   fill(currentColor); // Usa el color actual
-  rect(walkerX, walkerY, cellSize, cellSize); // Dibuja un cuadrado en la posición del walker
+  rect(walkerX, walkerY, cellWidth, cellHeight); // Dibuja un cuadrado en la posición del walker
 
   // Calcula la nueva posición basada en el ángulo
-  let newX = walkerX + cos(walkerAngle) * cellSize * walkerSpeed;
-  let newY = walkerY + sin(walkerAngle) * cellSize * walkerSpeed;
+  let newX = walkerX + cos(walkerAngle) * cellWidth * walkerSpeed;
+  let newY = walkerY + sin(walkerAngle) * cellHeight * walkerSpeed;
 
   // Si el walker se sale del lienzo, cambia de dirección
   if (
-    newX < cellSize * margin ||
-    newX >= width - cellSize * (margin + 1) ||
-    newY < cellSize * margin ||
-    newY >= height - cellSize * (margin + 1)
+    newX < cellWidth * margin ||
+    newX >= width - cellWidth * (margin + 1) ||
+    newY < cellHeight * margin ||
+    newY >= height - cellHeight * (margin + 1)
   ) {
     walkerAngle = random(TWO_PI); // Cambia a un ángulo aleatorio
-    newX = constrain(newX, cellSize * margin, width - cellSize * (margin + 1)); // Limita la posición X
-    newY = constrain(newY, cellSize * margin, height - cellSize * (margin + 1)); // Limita la posición Y
+    newX = constrain(newX, cellWidth * margin, width - cellWidth * (margin + 1)); // Limita la posición X
+    newY = constrain(newY, cellHeight * margin, height - cellHeight * (margin + 1)); // Limita la posición Y
   }
 
   // Actualiza la posición del walker
@@ -87,7 +89,7 @@ function drawWalker() {
   walkerY = newY;
 
   // Gira ligeramente el walker para un movimiento más natural
-  walkerAngle += random(-0.2, 0.2); // Pequeñas variaciones en el ángulo
+  walkerAngle += random(-0.0, 0.0); // Pequeñas variaciones en el ángulo
 }
 
 function createUI() {
@@ -124,18 +126,24 @@ function createUI() {
   let title = createElement('h2', 'Opciones');
   title.parent(modal);
 
-  // Selector de tamaño de celda
-  let sizeLabel = createElement('label', 'Tamaño de celda:');
+  // Selector de tamaño de celda (ancho y alto por separado)
+  let sizeLabel = createElement('label', 'Tamaño de celda (ancho x alto):');
   sizeLabel.parent(modal);
   sizeLabel.style('display', 'block');
   sizeLabel.style('margin-bottom', '10px');
-  let sizeInput = createInput(cellSize, 'number');
-  sizeInput.parent(modal);
-  sizeInput.style('display', 'block');
-  sizeInput.style('margin-bottom', '20px');
-  sizeInput.input(() => {
-    cellSize = int(sizeInput.value()); // Actualizar tamaño de celda
-    background(255); // Limpiar el fondo
+  let widthInput = createInput(cellWidth, 'number');
+  widthInput.parent(modal);
+  widthInput.style('display', 'inline-block');
+  widthInput.style('margin-right', '10px');
+  widthInput.input(() => {
+    cellWidth = int(widthInput.value()); // Actualizar ancho de celda
+    drawGrid(); // Redibujar la grilla
+  });
+  let heightInput = createInput(cellHeight, 'number');
+  heightInput.parent(modal);
+  heightInput.style('display', 'inline-block');
+  heightInput.input(() => {
+    cellHeight = int(heightInput.value()); // Actualizar alto de celda
     drawGrid(); // Redibujar la grilla
   });
 
@@ -164,8 +172,8 @@ function createUI() {
     isWalkerActive = !isWalkerActive; // Alternar estado del walker
     walkerButton.html(isWalkerActive ? 'Desactivar Dibujo Automático' : 'Activar Dibujo Automático');
     if (isWalkerActive) {
-      walkerX = floor(random(width / cellSize)) * cellSize; // Posición inicial aleatoria
-      walkerY = floor(random(height / cellSize)) * cellSize;
+      walkerX = floor(random(width / cellWidth)) * cellWidth; // Posición inicial aleatoria
+      walkerY = floor(random(height / cellHeight)) * cellHeight;
       walkerAngle = random(TWO_PI); // Ángulo inicial aleatorio
     }
   });
@@ -207,12 +215,12 @@ function exportHighResImage() {
   highResCanvas.noStroke();
 
   // Dibujar la grilla en alta definición
-  for (let x = cellSize * margin; x < width - cellSize * margin; x += cellSize) {
-    for (let y = cellSize * margin; y < height - cellSize * margin; y += cellSize) {
-      let pixelColor = get(x + cellSize / 2, y + cellSize / 2); // Obtener el color del píxel central
+  for (let x = cellWidth * margin; x < width - cellWidth * margin; x += cellWidth) {
+    for (let y = cellHeight * margin; y < height - cellHeight * margin; y += cellHeight) {
+      let pixelColor = get(x + cellWidth / 2, y + cellHeight / 2); // Obtener el color del píxel central
       if (pixelColor[0] !== 255 || pixelColor[1] !== 255 || pixelColor[2] !== 255) {
         highResCanvas.fill(pixelColor);
-        highResCanvas.rect(x * scaleFactor, y * scaleFactor, cellSize * scaleFactor, cellSize * scaleFactor);
+        highResCanvas.rect(x * scaleFactor, y * scaleFactor, cellWidth * scaleFactor, cellHeight * scaleFactor);
       }
     }
   }
