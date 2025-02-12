@@ -106,9 +106,9 @@ function generateDirectionalLines() {
 function generateOrganicLines() {
   if (random() > 0.5) return; // 50% de probabilidad de añadir líneas orgánicas
   
-  let numLines = int(random(2, 4)); // Pocas líneas, pero más largas
+  let numLines = int(random(2, 7)); // Pocas líneas, pero más largas
   stroke(random(colors));
-  strokeWeight(random(2, 4));
+  strokeWeight(random(2, 80));
   noFill();
   
   for (let i = 0; i < numLines; i++) {
