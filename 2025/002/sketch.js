@@ -43,7 +43,7 @@ function generateBackground() {
   let bgType = random(['solid', 'checkerboard']);
   
   if (bgType === 'checkerboard') {
-    let checkerSize = 40;
+    let checkerSize = 4;
     for (let x = margin; x < width - margin; x += checkerSize) {
       for (let y = margin; y < height - margin; y += checkerSize) {
         fill(random(colorsbg));
@@ -57,19 +57,19 @@ function generateBackground() {
 
 // Genera formas geométricas básicas
 function generateGeometricShapes() {
-  let numShapes = int(random(3, 6)); // Menos formas, más contraste
+  let numShapes = int(random(1, 3)); // Menos formas, más contraste
   for (let i = 0; i < numShapes; i++) {
     let shapeType = random(['rect', 'circle']);
     let x = random(margin, width - margin);
     let y = random(margin, height - margin);
-    let size = random(50, 300); // Mayor variación de tamaños
+    let size = random(50, 500); // Mayor variación de tamaños
     currentColor = random(colors);
     
     fill(currentColor);
     noStroke();
     
     if (shapeType === 'rect') {
-      rect(x, y, size, size);
+      rect(x, y, size*random(1, 3), size*random(1, 3));
     } else {
       ellipse(x, y, size, size);
     }
