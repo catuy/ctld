@@ -23,6 +23,7 @@ let colors = [
 // Configuración de líneas
 let numLines = 15; // Número de líneas a dibujar
 let lineWidth = 25; // Ancho fijo de línea
+let lineType = 'straight'; // Tipo de línea (recta/curva)
 let minNodes = 1; // Mínimo número de nodos/quiebres por línea
 let maxNodes = 3; // Máximo número de nodos/quiebres por línea
 let minLineLength = 100; // Longitud mínima de segmento de línea
@@ -184,10 +185,14 @@ function drawAllLines() {
     strokeCap(PROJECT); // Cambiado de SQUARE a PROJECT para mejor unión en los ángulos
     noFill(); // Eliminar el relleno para que las formas no tengan color de fondo
     
-    // Usar beginShape() para crear una línea continua sin fisuras
+    // Dibujar línea recta o curva según el tipo seleccionado
     beginShape();
     for (let p = 0; p < l.points.length; p++) {
-      vertex(l.points[p].x, l.points[p].y);
+      if (lineType === 'curved' && p > 0 && p < l.points.length - 1) {
+        curveVertex(l.points[p].x, l.points[p].y);
+      } else {
+        vertex(l.points[p].x, l.points[p].y);
+      }
     }
     endShape();
   }
@@ -261,6 +266,32 @@ function createUI() {
   // Crear un contenedor para los controles en dos columnas
   let controlsContainer = createDiv();
   controlsContainer.parent(menuContent);
+
+  // Dropdown para tipo de línea
+  let lineTypeControl = createDiv();
+  lineTypeControl.parent(controlsContainer);
+  lineTypeControl.style('grid-column', '1 / span 2');
+  
+  let lineTypeLabel = createElement('label', 'Tipo de línea:');
+  lineTypeLabel.parent(lineTypeControl);
+  lineTypeLabel.style('color', '#ddd');
+  lineTypeLabel.style('font-size', '12px');
+  
+  let lineTypeSelect = createSelect();
+  lineTypeSelect.parent(lineTypeControl);
+  lineTypeSelect.option('Straight');
+  lineTypeSelect.option('Curved');
+  lineTypeSelect.selected(lineType);
+  lineTypeSelect.style('width', '100%');
+  lineTypeSelect.style('padding', '6px');
+  lineTypeSelect.style('border', '1px solid #555');
+  lineTypeSelect.style('border-radius', '4px');
+  lineTypeSelect.style('background', '#333');
+  lineTypeSelect.style('color', '#fff');
+  lineTypeSelect.style('font-size', '12px');
+  lineTypeSelect.input(() => {
+    lineType = lineTypeSelect.value().toLowerCase();
+  });
   controlsContainer.style('display', 'grid');
   controlsContainer.style('grid-template-columns', '1fr 1fr'); // Dos columnas
   controlsContainer.style('gap', '8px'); // Reducido para más compacto
