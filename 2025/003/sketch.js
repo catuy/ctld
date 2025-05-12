@@ -483,11 +483,15 @@ function exportHighResImage() {
     highResCanvas.noFill(); // Eliminar el relleno para que las formas no tengan color de fondo
     
     // Usar beginShape() para crear una línea continua sin fisuras
-    highResCanvas.beginShape();
-    for (let p = 0; p < adjustedPoints.length; p++) {
-      highResCanvas.vertex(adjustedPoints[p].x, adjustedPoints[p].y);
-    }
-    highResCanvas.endShape();
+highResCanvas.beginShape();
+for (let p = 0; p < adjustedPoints.length; p++) {
+  if (lineType === 'curved' && p > 0 && p < adjustedPoints.length - 1) {
+    highResCanvas.curveVertex(adjustedPoints[p].x, adjustedPoints[p].y);
+  } else {
+    highResCanvas.vertex(adjustedPoints[p].x, adjustedPoints[p].y);
+  }
+}
+highResCanvas.endShape();
   }
   
   // Guardar la imagen
