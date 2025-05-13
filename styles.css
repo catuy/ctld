@@ -11,19 +11,22 @@ canvas#defaultCanvas0 {
     overflow: hidden;
     position: fixed;
 }
+
 ul {
     padding: 0px;
     margin: 0px;
     list-style: none;
 }
-ul li{
+
+ul li {
     height: 33vh;
     width: 100vw;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
-ul li span{
+
+ul li span {
     height: 33vh;
     width: 100vw;
     /* padding: 20px; */
@@ -31,16 +34,17 @@ ul li span{
     font-family: "Space Mono", serif;
 }
 
-a{
-color: black;
+a {
+    color: black;
 }
-a:hover{
+
+a:hover {
     opacity: 0.5;
-    }
+}
 
 /* Breakpoint para pantallas mayores a 768px (escritorio) */
 @media screen and (min-width: 768px) {
-    ul li{
+    ul li {
         height: 33vh;
         width: 25vw;
         background-size: contain;
@@ -48,5 +52,67 @@ a:hover{
         background-position: center;
         float: left;
     }
+}
 
+/* Sidebar styles */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    transition: transform 0.3s ease;
+    transform: translateX(-250px);
+    z-index: 1000;
+}
+
+#sidebar.collapsed {
+    transform: translateX(0);
+}
+
+#sidebar button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    border: none;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#sidebar button:hover {
+    background-color: #555;
+}
+
+#canvas-container {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
+}
+
+#canvas-container.collapsed {
+    margin-left: 0;
+}
+
+@media screen and (max-width: 768px) {
+    #sidebar {
+        width: 100%;
+        height: auto;
+        transform: translateY(-100%);
+    }
+
+    #sidebar.collapsed {
+        transform: translateY(0);
+    }
+
+    #canvas-container {
+        margin-left: 0;
+    }
+
+    #canvas-container.collapsed {
+        margin-top: 100px;
+    }
 }

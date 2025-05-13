@@ -8,6 +8,17 @@
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  #canvas-container {
+    width: 100vw;
+    height: 100vh;
+  }
+</style>
 <body>
   <ul>
     <a href="2025/002/index.html"><li style="background-image: url(tiles/2025002.png);"><span>2025002</span></li></a>
@@ -36,5 +47,8 @@
         });
     }
   </script>
+<div id="canvas-container"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+<script src="2025/004/sketch.js"></script>
 </body>
 </html>

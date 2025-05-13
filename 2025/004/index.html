@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ctld</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="sidebar" class="collapsed">
+  <button onclick="toggleSidebar()">☰</button>
+  <label>Ancho:</label>
+  <input type="range" id="rectWidth" min="10" max="200" value="60" oninput="updateRectangleWidth(this.value)">
+  <label>Alto:</label>
+  <input type="range" id="rectHeight" min="10" max="200" value="60" oninput="updateRectangleHeight(this.value)">
+  <label>Fondo:</label>
+  <input type="color" id="bgColor" value="#c0c0c0" oninput="updateBackgroundColor(this.value)">
+  <button id="playPause">Pausa</button>
+<button id="guardar" onclick="saveHighQualityImage()">Guardar</button>
+</div>
+  <div id="canvas-container"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script src="sketch.js"></script>
+<script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('collapsed');
+      const canvasContainer = document.getElementById('canvas-container');
+      canvasContainer.classList.toggle('collapsed');
+    }
+
+    function updateRectangleWidth(newWidth) {
+      elipssewidth = parseInt(newWidth);
+    }
+
+    function updateRectangleHeight(newHeight) {
+      elipseheight = parseInt(newHeight);
+    }
+
+    function updateBackgroundColor(newColor) {
+      background(newColor);
+    }
+
+function saveHighQualityImage() {
+  const img = get();
+  img.resize(1000 * 15, 700 * 15);
+  saveHighQualityImage(img, "myfile-" + hour() + "" + minute() + "" + second(), "jpg");
+}
+</script>
+</body>
+</html>
