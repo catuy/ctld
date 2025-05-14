@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ctld</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.png" type="image/png">
 </head>
 <body>
 <div id="sidebar" class="collapsed">
@@ -23,6 +24,7 @@
 </div>
   <div id="canvas-container"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
   <script src="sketch.js"></script>
 <script>
     function toggleSidebar() {
@@ -32,10 +34,26 @@
       canvasContainer.classList.toggle('collapsed');
     }
 
-    // The updateExportQuality function is now handled in sketch.js
-    // The updateRectangleWidth function is now handled in sketch.js
-    // The updateRectangleHeight function is now handled in sketch.js
-    // The updateBackgroundColor function is now handled in sketch.js
+    function updateRectangleWidth(value) {
+      window.updateRectangleWidth(value);
+    }
+
+    function updateRectangleHeight(value) {
+      window.updateRectangleHeight(value);
+    }
+
+    function updateBackgroundColor(color) {
+      window.updateBackgroundColor(color);
+    }
+
+    function updateExportQuality(quality) {
+      window.updateExportQuality(quality);
+      document.getElementById('qualityValue').innerText = quality + 'x';
+    }
+
+    document.getElementById('guardar').addEventListener('click', function() {
+      window.saveCanvas();
+    });
 </script>
 </body>
 </html>
